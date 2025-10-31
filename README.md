@@ -2,7 +2,7 @@
 
 A comprehensive Spring Boot application for managing restaurant production operations, including product management, recipe tracking, order processing, inventory control, and supplier management.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -15,11 +15,11 @@ A comprehensive Spring Boot application for managing restaurant production opera
 - [Running the Application](#running-the-application)
 - [API Endpoints](#api-endpoints)
 
-## 🎯 Overview
+## Overview
 
 Gestion Production Restaurant is a full-stack web application designed to streamline restaurant production management. It provides comprehensive tools for tracking products, managing recipes, processing orders, controlling inventory, and managing supplier relationships.
 
-## ✨ Features
+## Features
 
 ### Core Functionalities
 
@@ -79,7 +79,7 @@ Gestion Production Restaurant is a full-stack web application designed to stream
   - Role-based access control (Admin, User)
   - Spring Security integration
 
-## 🛠 Technology Stack
+## Technology Stack
 
 - **Framework**: Spring Boot 3.0.6
 - **Java Version**: 17
@@ -92,7 +92,7 @@ Gestion Production Restaurant is a full-stack web application designed to stream
 - **Development Tools**: Lombok, Spring Boot DevTools
 - **Connector**: MySQL Connector/J
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 src/main/java/com/example/gestionproductionrestaurant/
@@ -142,7 +142,7 @@ GestionProductionRestaurantApplication.java  # Main application class
 AppConfig.java        # Application configuration
 ```
 
-## 📋 Prerequisites
+## Prerequisites
 
 Before running this application, ensure you have the following installed:
 
@@ -151,7 +151,7 @@ Before running this application, ensure you have the following installed:
 - **MySQL 8.0+** or compatible database
 - **IDE** (Eclipse, IntelliJ IDEA, or VS Code) - Optional but recommended
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 ### 1. Clone the Repository
 
@@ -202,7 +202,7 @@ mvnw.cmd spring-boot:run  # Windows
 
 The application will start on `http://localhost:8080` (default port).
 
-## 👤 Default Users
+## Default Users
 
 The application initializes with the following default users on startup:
 
@@ -218,7 +218,7 @@ The application initializes with the following default users on startup:
 
 > **Note**: Change these default credentials in production environments. The initialization code is located in `GestionProductionRestaurantApplication.java`.
 
-## 🌐 API Endpoints
+## API Endpoints
 
 The application provides REST endpoints for various operations. Main controllers include:
 
@@ -231,7 +231,7 @@ The application provides REST endpoints for various operations. Main controllers
 - **SecurityController** - Authentication & authorization
 - **DashboardController** - Dashboard data
 
-## 📝 Key Entities
+## Key Entities
 
 ### Produit (Product)
 - Product name, brand, barcode
@@ -260,7 +260,7 @@ The application provides REST endpoints for various operations. Main controllers
 - Line items tracking
 - Supplier association
 
-## 🔒 Security
+## Security
 
 The application uses Spring Security for authentication and authorization:
 - **Authentication**: Username/password based
@@ -268,7 +268,7 @@ The application uses Spring Security for authentication and authorization:
 - **Integration**: Thymeleaf security extensions
 - **Default login page**: `/login`
 
-## 🧪 Development
+## Development
 
 ### Using DevTools
 
@@ -283,7 +283,7 @@ The project uses Lombok to reduce boilerplate code:
 - `@AllArgsConstructor` / `@NoArgsConstructor` - Constructor generation
 - `@ToString` - Customizable toString generation
 
-## 📦 Dependencies
+## Dependencies
 
 Key dependencies in `pom.xml`:
 - Spring Boot Starter Web
@@ -294,33 +294,4 @@ Key dependencies in `pom.xml`:
 - MySQL Connector
 - Lombok
 - Thymeleaf Spring Security 6
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👨‍💻 Author
-
-Developed as part of a Spring Boot learning project.
-
-## 📞 Support
-
-For issues and questions, please open an issue in the repository.
-
----
-
-**Note**: This application is configured for development. Remember to:
-- Change default user credentials for production
-- Configure proper database connection pooling
-- Set up appropriate security configurations
-- Configure logging levels for production
-- Review and optimize JPA query performance
 
