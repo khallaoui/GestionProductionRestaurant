@@ -1,0 +1,102 @@
+body {
+
+  align-items: center;
+  background: #8e44ad;
+
+}
+
+h1 {
+  margin: 0 0 1em;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+input[type=checkbox],
+input[type=radio] {
+  position: absolute;
+  opacity: 0;
+  z-index: auto;   /* Modifié : Augmenter le z-index à 1 */
+}
+
+
+label {
+  position: relative;
+  margin-right: 1em;
+  padding-left: 2em;
+  padding-right: 1em;
+  line-height: 2;
+  color: #8e44ad;
+  cursor: pointer;
+}
+label:before {
+  box-sizing: border-box;
+  content: " ";
+  position: absolute;
+  top: 0.3em;
+  left: 0;
+  display: block;
+  width: 1.4em;
+  height: 1.4em;
+  color: #8e44ad;
+  border: 2px solid #f7e4f2;
+  border-radius: 0.25em;
+  z-index: 0;
+}
+
+input[type=radio] + label::before {
+  border-radius: 1em;
+
+}
+.spanJours{
+  position: relative;
+  margin-right: 1em;
+  padding-left: 2em;
+  padding-right: 1em;
+  line-height: 2;
+  color: #8e44ad;
+}
+.spanJoursInput{
+  padding: 2%;
+  box-sizing: border-box;
+  width: 8em;
+  height: 2em;
+  color: #8e44ad;
+  border: 2px solid #cb99c9;
+  border-radius: 0.25em;
+  z-index: 0;
+}
+.spanJoursInput:focus{
+  outline:none;
+  border-color: mediumvioletred;
+}
+/* Checked */
+input[type=checkbox]:checked + label,
+input[type=radio]:checked + label {
+  padding-left: 1em;
+  color: mediumvioletred;
+  background:#f7e4f2;
+  border-radius:25%;
+  height: 2.2em;
+
+}
+input[type=checkbox]:checked + label:before,
+input[type=radio]:checked + label:before {
+ /* top: 0;
+  width: 100%;
+  height: 2em;*/
+  z-index: -1;
+}
+
+/* Transition */
+label,
+label::before {
+  -webkit-transition: 0.25s all ease;
+  -o-transition: 0.25s all ease;
+  transition: 0.25s all ease;
+}
+
+/*# sourceMappingURL=Radio.css.map */

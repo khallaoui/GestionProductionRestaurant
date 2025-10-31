@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <title>PRODUCTION</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  th:href="@{/bootstrap.min.css}">
+    <script type="text/javascript" th:src="@{/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/jquery-3.6.1.js}"></script>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" th:href="@{/chercher.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <script>
+        //Semantic UI
+        $( document ).ready(function(){
+
+            $('.addModal').click(function(){
+                $('#addModal')
+                    .modal('show');
+            });
+
+            $('.editModal').click(function(){
+                $('#editModal')
+                    .modal('show');
+            });
+
+            $('.deleteModal').click(function(){
+                $('#deleteModal')
+                    .modal('show');
+            });
+
+            $('.hideModal').click(function(){
+                $('#hideModal')
+                    .modal('hide');
+            });
+        });
+
+        //Angular JS
+        var myApp = angular.module('myApp', []);
+
+        myApp.controller("myController", function($scope) {
+
+            $scope.newUser = {};
+            $scope.clickedUser = {};
+            $scope.alertMessage = "";
+
+            $scope.users = [
+
+                {
+                    name: "Oleta Level",
+                    phone_number: "+442032960159",
+                    address: "10 London Wall, London EC2M 6SA, UK"
+                }, {
+                    name: "Maida Harju",
+                    phone_number: "+442032960899",
+                    address: "Woodside House, 94 Tockholes Rd, Darwen BB3 1LL, UK"
+                }, {
+                    name: "Lia Pigford",
+                    phone_number: "+442032960182",
+                    address: "23 Westmorland Cl, Darwen BB3 2TQ, UK"
+                }, {
+                    name: "Ghislaine Darden",
+                    phone_number: "+442032960427",
+                    address: "20-24 Knowlesly Rd, Darwen BB3 2NE, UK"
+                }, {
+                    name: "Jana Spitler",
+                    phone_number: "+442032960370",
+                    address: "4 St Lucia Cl, Darwen BB3 0SJ, UK"
+                }, {
+                    name: "Dolly Detweiler",
+                    phone_number: "+442032960977",
+                    address: "18 Johnson Rd, Darwen BB3, UK"
+                }, {
+                    name: "Stanley Vanderhoof",
+                    phone_number: "+442032960000",
+                    address: "17 Anchor Ave, Darwen BB3 0AZ, UK"
+                }, {
+                    name: "Adan Milian",
+                    phone_number: "+442032960011",
+                    address: "20 Ellerbeck Rd, Darwen BB3 3EX, UK"
+                }, {
+                    name: "Marivel Molina",
+                    phone_number: "+442032960013",
+                    address: "Tockholes Rd, Darwen BB3, UK"
+                }, {
+                    name: "Kris Everett",
+                    phone_number: "+442032960012",
+                    address: "Pinewood, Tockholes Rd, Darwen BB3 1JY, UK"
+                }
+
+            ];
+
+            $scope.saveUser = function() {
+                $scope.users.push($scope.newUser);
+                $scope.newUser = {};
+
+                $scope.alertMessage = "New item added successfully!";
+            };
+
+            $scope.selectUser = function(user) {
+                console.log(user);
+                $scope.clickedUser = user;
+            };
+
+            $scope.updateUser = function() {
+                $scope.alertMessage = "Update successfully!";
+            };
+
+            $scope.deleteUser = function() {
+                $scope.users.splice($scope.users.indexOf($scope.clickedUser), 1);
+                $scope.alertMessage = "Deleted successfully!";
+            };
+
+            $scope.clickedAlert = function() {
+                $scope.alertMessage = "";
+            };
+
+        });
+    </script>
+    <style>
+
+        .container{
+            height: 50%;
+            position: relative;
+            max-width: 100%;
+            /*  width: 100%;*/
+            bottom: 5%;
+            top: 10%;
+            width: 35%;
+            border-radius: 6px;
+            padding: 30px;
+            margin: 0 10px;
+            background-color: #fff;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        .containerr{
+            height: 50%;
+            position: relative;
+            max-width: 30%;
+            /*  width: 100%;*/
+            bottom: 5%;
+            top: 10%;
+            border-radius: 6px;
+            padding: 30px;
+            margin: 0 10px;
+            background-color: #fff;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+
+        /* Style pour les titres de chaque information d'une étape de production */
+        .col.title h6 {
+            font-weight: bold;
+            margin-bottom: 0;
+            font-family: 'Poppins', sans-serif;
+            color: rgba(134, 77, 127, 0.96);
+        }
+
+        /* Style pour les informations de chaque étape de production */
+        .col h7 {
+            margin-bottom: 0;
+        }
+
+        .btn-custom {
+            font-size: 20px; /* ajustez la taille du texte */
+            padding: 10px 20px; /* ajustez le rembourrage */
+        }
+        .nextBtn
+        {
+            top: 50%;
+            right: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 50px;
+            background:transparent;
+            text-decoration: none;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 50px;
+            color: rgba(255, 174, 241, 0.87);
+            font-size: 20px;
+            font-family: verdana;
+            letter-spacing: 4px;
+            /*    border-radius: 20px; */
+        }
+        .nextBtn:hover{
+            color: #673AB7;
+        }
+        .nextBtn:before,
+        .nextBtn:after,
+        .nextBtn span:before,
+        .nextBtn span:after
+        {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgb(172, 142, 229);
+            transition: 1s;
+            mix-blend-mode: hue;
+        }
+
+        .nextBtn:before
+        {
+            top: -2px;
+            left: -2px
+        }
+        .nextBtn:after
+        {
+            top: -2px;
+            right: -2px;
+        }
+        .nextBtn span:before
+        {
+            bottom: -2px;
+            left: -2px
+        }
+        .nextBtn span:after
+        {
+            bottom: -2px;
+            right: -2px
+        }
+
+        .nextBtn:hover:before,
+        .nextBtn:hover:after,
+        .nextBtn:hover span:before,
+        .nextBtn:hover span:after
+        {
+            width: calc( 180px/2 );
+            height: calc( 20px/2 )
+        }
+        .icon-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #cdcdcd;
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            position: relative;
+            transition: width 0.2s ease-in-out;
+        }
+        .add-btn:hover {
+            width: 120px;
+        }
+        .add-btn::before,
+        .add-btn::after {
+            transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+            content: "";
+            position: absolute;
+            height: 4px;
+            width: 10px;
+            top: calc(50% - 2px);
+            background: #b9d932;
+        }
+        .add-btn::after {
+            right: 14px;
+            overflow: hidden;
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+        }
+        .add-btn::before {
+            left: 14px;
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+        }
+        .icon-btn:focus {
+            outline: none;
+        }
+        .btn-txt {
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .add-btn:hover::before,
+        .add-btn:hover::after {
+            width: 4px;
+            border-radius: 2px;
+        }
+        .add-btn:hover .btn-txt {
+            opacity: 1;
+        }
+        .add-icon::after,
+        .add-icon::before {
+            transition: all 0.2s ease-in-out;
+            content: "";
+            position: absolute;
+            height: 20px;
+            width: 3px;
+            top: calc(50% - 10px);
+            background: #b9d932;
+            overflow: hidden;
+        }
+        .add-icon::before {
+            left: 22px;
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+        }
+        .add-icon::after {
+            right: 22px;
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+        }
+        .add-btn:hover .add-icon::before {
+            left: 15px;
+            height: 4px;
+            top: calc(50% - 2px);
+        }
+        .add-btn:hover .add-icon::after {
+            right: 15px;
+            height: 4px;
+            top: calc(50% - 2px);
+        }
+        /* .nextBtn {
+           border: none;
+           border-radius: 5px;
+           color: white;
+           cursor: pointer;
+           font-size: 15px;
+           padding: 10px;
+           text-align: center;
+           text-decoration: none;
+           margin-right: -30px;
+         }
+
+         .nextBtn a {
+           color: white;
+           text-decoration: none;
+         }*/
+        btn:focus{
+            border:none;
+            border-color: transparent;
+        }
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+<div th:replace="NAvBAR :: navbar"></div>
+
+
+<div class="input-field">
+    <div class="container">
+        <br>
+        <a class="nextBtn pull-right" type="submit" th:href="@{/productions/create/{id}(id=${produit.id})}"><span></span>Ajouter</a>
+        <div class="row d-flex">
+            <div class="col title"><h6 style="display: inline;"> Matière premiere :</h6>&nbsp;<h7 th:text="${produit.nom}" style="display: inline;"></h7></div>
+
+        </div>&nbsp;
+
+        <div class="input-field"></div>
+        <div class="input-field"></div>
+        <div class="input-field" style="color: transparent">  hi</div>
+        <div class="input-field"></div>
+        <div class="row d-flex row-cols-3" >
+            <div class="col" th:each="prod, stat : ${productions}">
+                <div class="input-field">
+                    <div class="container shadow" style="border-radius: 30px;">
+                        <div class="row d-flex">
+                            <div class="col title bold"><h5 style="color:#DDA0DD; font-family: 'impact', sans-serif";> Nom de l'étape :</h5></div>
+                            <div class="col"><h5 th:text="${prod.titre}" style="color: #A9A9A9;font-family: 'inherit', sans-serif"></h5></div>
+                        </div>
+                    </div>
+                </div>
+                &nbsp;
+                <div class="input-field">
+                    <div class="container">
+
+                        <div class="row d-flex">
+                            <div class="col title"><h6> L'unite d'entree :</h6></div>
+                            <div class="col"><h7 th:text="${prod.unite_entre}"></h7></div>
+                        </div>&nbsp;
+                        <div class="row d-flex">
+                            <div class="col title"><h6> La quantite entree :</h6></div>
+                            <div class="col"><h7 th:text="${prod.quantite_entre}"></h7></div>
+                        </div>&nbsp;
+
+                        <div class="row d-flex">
+                            <div class="col title"><h6> L'unite de sortie :</h6></div>
+                            <div class="col"><h7 th:text="${prod.unite_sortie}"></h7></div>
+                        </div>&nbsp;
+                        <div class="row d-flex">
+                            <div class="col title"><h6> La quantite de sortie:</h6></div>
+                            <div class="col"><h7 th:text="${prod.quantite_sortie}"></h7></div>
+                        </div>&nbsp;
+                        <div class="row d-flex">
+                            <div class="col title"><h6> Duree de prepartion :</h6></div>
+                            <div class="col"><h7 th:text="${prod.temps}"></h7></div>
+                        </div>&nbsp;
+                        <div class="row d-flex">
+                            <div class="col title"><h6> Les pertes :</h6></div>
+                            <div class="col"><h7 th:text="${prod.perte}"></h7></div>
+                        </div>&nbsp;
+                        <div class="row d-flex">
+                            <div class="col title"><h6> Prix Unitaire:</h6></div>
+                            <div class="col"><h7 th:text="${prod.prix}"></h7>DH</div>
+                        </div>&nbsp;
+                        <div class="row d-flex">
+                            <div class="col title"><h6> La categorie :</h6></div>
+                            <div class="col"><h7 th:text="${prod.categorie.libelle}"></h7></div>
+                        </div>&nbsp;
+                        <div class="row d-flex">
+                            <div class="col title"><h6> Le laboratoire :</h6></div>
+                            <div class="col"><h7 th:text="${prod.laboratoire.nom}"></h7></div>
+                        </div>&nbsp;
+                        <div class="row d-flex">
+                            <div class="col title"><h6> Description :</h6></div>
+                            <div class="col"><h7 th:text="${prod.description}"></h7></div>
+                        </div>&nbsp;
+                        <div class="row d-flex">
+                            <div class="col title"><h6> Lad date et l'heure de preparation :</h6></div>
+                            <div class="col"><h7 th:text="${prod.date_heure_production}"></h7></div>
+                        </div>
+                        &nbsp;
+                        <!--            <div class="row d-flex">-->
+                        <!--              <div class="col title"><a class="btn1 btn-sm" th:href="@{/production/new/{id}(id=${prod.id})}"><i class="fa-solid fa-pen-to-square" ></i></a></div>-->
+                        <!--              <div class="col title"><a class="btn1 btn-sm" th:href="@{/production/delete/{id}(id=${prod.id})}" data-toggle="modal" data-target="#confirmModal"><i class="fas fa-trash"></i></a></div>-->
+                        <!--            </div>-->
+                        <!--  <div class="d-flex justify-content-end">
+                            <a class="btn" style="color: #864d7f" th:href="@{/production/new/{id}(id=${prod.id})}">
+                              <i class="fa-solid fa-pen-to-square btn-custom"></i>
+                            </a><a class="btn btn-sm" th:href="@{/production/delete/{id}(id=${prod.id})}" data-toggle="modal" data-target="#confirmModal">
+                            <i class="fas fa-trash btn-custom"></i>
+                          </a>
+                          </div>-->
+                        <div class="d-flex justify-content-end">
+                            <a class="btn" style="color: rgba(255, 174, 241, 0.87); margin-right: -40px;" th:href="@{/production/new/{id}(id=${prod.id})}">
+                                <i class="fa-solid fa-pen-to-square btn-custom"></i>
+                            </a>
+                            <a class="btn btn-sm deleteModal" style="margin-left: -5px;" data-bs-toggle="modal" th:data-bs-target="'#deleteModal' + ${stat.index}">
+                                <i class="fas fa-trash" style="color: #b9d932; font-size: 20px; padding: 10px 20px;"></i>
+                            </a>
+                        </div>
+
+                        <form th:action="@{/production/delete/{id}(id=${prod.id})}" method="post">
+                            <div class="modal fade" th:id="'deleteModal' + ${stat.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                                <div class="modal-dialog" style="width: 25%;">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div>
+                                                <i class="fas fa-exclamation-circle d-flex flex-row justify-content-center align-items-center" style="font-size:3rem;margin: 0 auto;color:#A18594"></i>
+                                            </div><br>
+                                            <p class="text-center">
+                                            Attention, la suppression de la catégorie <strong style="color: #b9d932" th:text="${prod.titre}">  </strong>
+                                            va conduire à la suppression de tous les produits qui ont une liaison avec cette catégorie
+                                            <br><strong style="color: #b9d932;font-size:1.2rem"> Êtes-vous sûr de vouloir supprimer cela ? </strong>
+                                            </p>  </div>
+                                        <div class="modal-footer">
+                                            <button class="icon-btn add-btn">
+                                                <div class="btn-txt fw-bold" style="color: #A18594">Supprimer</div>
+                                            </button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            &nbsp;
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

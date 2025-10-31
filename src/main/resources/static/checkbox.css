@@ -1,0 +1,131 @@
+
+
+.container {
+  width: 800px;
+  margin: 50px auto 0px;
+  text-align: center;
+}
+.container > a {
+  color: #1f1f1f;
+  font-size: 20px;
+  display: inline-block;
+  margin-top: 20px;
+}
+.container > a i {
+  color: #DB324D;
+}
+.container > a:nth-child(2):after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border: 2px solid #DB324D;
+  border-radius: 20px;
+  margin: 0px 10px 0px 15px;
+  position: relative;
+  top: -2px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 25px;
+}
+h1 span {
+  font-family: "Satisfy", cursive;
+  font-size: 35px;
+  color: #DB324D;
+  position: relative;
+}
+
+form {
+  margin-top: 55px;
+}
+form:last-child {
+  margin-bottom: 55px;
+}
+form h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+/* input styles !!!YOU NEED THEM */
+.checkbox-block {
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkbox-effect:not(:checked),
+.checkbox-effect:checked {
+  position: absolute;
+  left: -9999px;
+}
+
+label {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+
+
+/* checkbox effect #4 */
+.checkbox-effect-4:not(:checked) + label:before,
+.checkbox-effect-4:checked + label:before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #5a5a5a;
+  box-sizing: border-box;
+  border-radius: 3px;
+  margin-right: 20px;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  transition-delay: 0.2s;
+}
+
+.checkbox-effect-4:not(:checked) + label:after,
+.checkbox-effect-4:checked + label:after {
+  content: "\f00c";
+  font-family: fontawesome;
+  font-size: 22px;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 2px;
+  color: #72195A;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+  transform-origin: center center;
+  opacity: 0;
+}
+
+.checkbox-effect-4:not(:checked) + label:after {
+  transform: scale(0);
+}
+.checkbox-effect-4:checked + label:before {
+  transform: scale(0);
+  opacity: 0;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  transition-delay: 0s;
+}
+
+.checkbox-effect-4:checked + label:after {
+  transform: scale(1);
+  opacity: 1;
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.57, 1.9, 0, 1.52);
+  transition-delay: 0.2s;
+}
+

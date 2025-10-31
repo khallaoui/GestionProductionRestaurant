@@ -1,0 +1,397 @@
+<div th:fragment="navbar" xmlns:sec="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"  th:href="@{D:/SpringBOOTWeb/GestionProductionRestaurant/src/main/resources/static/NavBarcss.css}">
+<script type="text/javascript" th:src="@{D:/SpringBOOTWeb/GestionProductionRestaurant/src/main/resources/static/NavBarJs.js}"></script>
+<script type="text/javascript" th:src="@{/jquery-3.6.1.js}"></script>
+<link rel="stylesheet"  th:href="@{/bootstrap.min.css}">
+<script type="text/javascript" th:src="@{/bootstrap.min.js}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" th:href="@{alert.css}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://fonts.cdnfonts.com/css/gistesy" rel="stylesheet">
+
+</head>
+<style>
+  @import url('https://use.fontawesome.com/releases/v5.0.9/css/all.css');
+  @import url('https://fonts.googleapis.com/css?family=Roboto');
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Oswald:wght@500&display=swap');
+  @import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+  @import url('https://fonts.cdnfonts.com/css/gistesy');
+   @import url('https://fonts.googleapis.com/css?family=Roboto');
+    @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital@1&family=Oswald:wght@500&display=swap');
+    @import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+
+    body{
+      font-family: 'Roboto', sans-serif;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    i {
+      margin-right: 10px;
+    }
+    *----------bootstrap-navbar-css------------*
+
+    .navbar-logo{
+      padding: 20px;
+
+               }
+    .navbar-logo:hover{
+      color: white;
+    }
+    .navbar-mainbg{
+      background:#864d7f;
+      padding: 0px;
+    }
+    #navbarSupportedContent{
+      overflow: hidden;
+      position: relative;
+    }
+    #navbarSupportedContent ol{
+      padding: 0px;
+      margin: 0px;
+    }
+    #navbarSupportedContent ol li a i{
+      margin-right: 10px;
+    }
+    #navbarSupportedContent li {
+      list-style-type: none;
+      float: left;
+    }
+    #navbarSupportedContent ol li a.active {
+      color: grey;
+
+    }
+    #navbarSupportedContent ol li a{
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      display: block;
+      padding: 20px 20px;
+      transition-duration:0.6s;
+      transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      position: relative;
+    }
+    #navbarSupportedContent>ol>li.active>a{
+      color: grey;
+      background-color: transparent;
+      font-family: 'poppins', sans-serif;
+
+      transition: all 0.7s;
+    }
+    #navbarSupportedContent a:not(:only-child):after {
+      content: "\f105";
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      font-size: 14px;
+      font-family: "Font Awesome 5 Free";
+      display: inline-block;
+      padding-right: 3px;
+      vertical-align: middle;
+      font-weight: 900;
+      transition: 0.5s;
+    }
+    #navbarSupportedContent .active>a:not(:only-child):after {
+      transform: rotate(90deg);
+    }
+    .hori-selector{
+      display:inline-block;
+      position:absolute;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      transition-duration:0.6s;
+      transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      background-color: #fff;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      margin-top: 10px;
+    }
+    .hori-selector .right,
+    .hori-selector .left{
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background-color: #fff;
+      bottom: 10px;
+    }
+    .hori-selector .right{
+      right: -25px;
+    }
+    .hori-selector .left{
+      left: -25px;
+    }
+    .hori-selector .right:before,
+    .hori-selector .left:before{
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background:#864d7f;}
+    .hori-selector .right:before{
+      bottom: 0;
+      right: -25px;
+    }
+    .hori-selector .left:before{
+      bottom: 0;
+      left: -25px;
+    }
+
+
+    @media(min-width: 992px){
+      .navbar-expand-custom {
+        -ms-flex-flow: row nowrap;
+        flex-flow: row nowrap;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+      }
+      .navbar-expand-custom .navbar-nav {
+        -ms-flex-direction: row;
+        flex-direction: row;
+      }
+      .navbar-expand-custom .navbar-toggler {
+        display: none;
+      }
+      .navbar-expand-custom .navbar-collapse {
+        display: -ms-flexbox!important;
+        display: flex!important;
+        -ms-flex-preferred-size: auto;
+        flex-basis: auto;
+      }
+    }
+
+
+    @media (max-width: 991px){
+      #navbarSupportedContent ul li a{
+        padding: 12px 30px;
+      }
+      .hori-selector{
+        margin-top: 0px;
+        margin-left: 10px;
+        border-radius: 0;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+      }
+      .hori-selector .left,
+      .hori-selector .right{
+        right: 10px;
+      }
+      .hori-selector .left{
+        top: -25px;
+        left: auto;
+      }
+      .hori-selector .right{
+        bottom: -25px;
+      }
+      .hori-selector .left:before{
+        left: -25px;
+        top: -25px;
+      }
+      .hori-selector .right:before{
+        bottom: -25px;
+        left: -25px;
+      }
+    }  body{
+         background-color: white;
+       }
+
+     /********************Alert*/
+
+</style>
+<body>
+<!--- ## DRIBBBLE + TWITTER ############# -->
+
+
+<nav class="navbar navbar-expand-custom navbar-mainbg">
+  <a class="navbar-brand navbar-logo" style="font-size: 25px;margin-left: 5px;font-family: 'Gistesy', sans-serif;color: #dcb5eb" href="#">ProdChef</a>
+  <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-bars text-white"></i>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ol class="navbar-nav ml-auto">
+      <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/recet}"><i class="fa-solid fa-utensils"></i>Recette</a>
+      </li>
+      <li class="nav-item ">
+      <a class="nav-link" th:href="@{/listProduits}"><i class="fa-solid fa-carrot"></i>Ingredient</a>
+    </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/fourni}"><i class="fa-solid fa-truck"></i>Fournisseur</a>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" th:href="@{/listProduitsAlert}"><i class="fa-light fa-bell fa-shake fa-lg"></i></a>
+    </li>
+      <li class="nav-item">
+      <a class="nav-link" th:href="@{/PlusDetail}"><i class="fa-solid fa-ellipsis-vertical"></i>Details</a>
+    </li>
+      <li    class="nav-item" sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}" method="post">
+          <button  class="nav-link btn btn-link" style="margin-left: 60px;color: white; margin-top: 11px">
+            <i class="fas fa-unlink"></i>
+            Déconnecté
+          </button>
+        </form>
+      </li>
+    </ol>
+  </div>
+
+</nav>
+</body>
+</html><script>
+/*
+  // ---------Responsive-navbar-active-animation-----------
+  function test(){
+    var tabsNewAnim = $('#navbarSupportedContent');
+    var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+    var activeItemNewAnim = tabsNewAnim.find('.active');
+    var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+    var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+    var itemPosNewAnimTop = activeItemNewAnim.position();
+    var itemPosNewAnimLeft = activeItemNewAnim.position();
+    $(".hori-selector").css({
+      "top":itemPosNewAnimTop.top + "px",
+      "left":itemPosNewAnimLeft.left + "px",
+      "height": activeWidthNewAnimHeight + "px",
+      "width": activeWidthNewAnimWidth + "px"
+    });
+    $("#navbarSupportedContent").on("click","li",function(e){
+      $('#navbarSupportedContent ul li').removeClass("active");
+      $(this).addClass('active');
+
+
+      var activeWidthNewAnimHeight = $(this).innerHeight();
+      var activeWidthNewAnimWidth = $(this).innerWidth();
+      var itemPosNewAnimTop = $(this).position();
+      var itemPosNewAnimLeft = $(this).position();
+      $(".hori-selector").css({
+        "top":itemPosNewAnimTop.top + "px",
+        "left":itemPosNewAnimLeft.left + "px",
+        "height": activeWidthNewAnimHeight + "px",
+        "width": activeWidthNewAnimWidth + "px"
+      });
+    });
+  }
+  $("#navbarSupportedContent").on("click", "li", function(e) {
+    $('#navbarSupportedContent ul li').removeClass("active");
+    $(this).addClass('active');
+    $(this).find('a')[0].click();
+  });
+  $(document).ready(function(){
+    setTimeout(function(){ test(); });
+  });
+  $(window).on('resize', function(){
+    setTimeout(function(){ test(); }, 500);
+  });
+ $(".navbar-toggler").click(function(){
+    $(".navbar-collapse").slideToggle(300);
+    setTimeout(function(){ test(); });
+  });
+
+
+
+  // --------------add active class-on another-page move----------
+  $(document).ready(function() {
+    // Ajoutez la classe "active" à l'élément de liste correspondant à la page actuelle
+    var currentPath = window.location.pathname;
+    $("#navbarSupportedContent ul li a").each(function() {
+      var href = $(this).attr("href");
+      if (href === currentPath) {
+        $(this).parent().addClass("active");
+      }
+    });
+
+    // Définir le comportement de clic pour les éléments de la liste
+    $("#navbarSupportedContent ul li").click(function() {
+      // Supprimer la classe "active" de tous les éléments de la liste
+      $("#navbarSupportedContent ul li").removeClass("active");
+
+      // Ajouter la classe "active" à l'élément cliqué
+      $(this).addClass("active");
+    });
+  });
+
+
+*/
+
+
+
+ $(document).ready(function() {
+ function test() {
+   var tabsNewAnim = $('#navbarSupportedContent');
+   var selectorNewAnim = $('#navbarSupportedContent').find('li').length;
+   var activeItemNewAnim = tabsNewAnim.find('.active');
+   var activeWidthNewAnimHeight = activeItemNewAnim.innerHeight();
+   var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+   var itemPosNewAnimTop = activeItemNewAnim.position();
+   var itemPosNewAnimLeft = activeItemNewAnim.position();
+   $(".hori-selector").css({
+     "top": itemPosNewAnimTop.top + "px",
+     "left": itemPosNewAnimLeft.left + "px",
+     "height": activeWidthNewAnimHeight + "px",
+     "width": activeWidthNewAnimWidth + "px"
+   });
+   $("#navbarSupportedContent").on("click", "li", function (e) {
+     $('#navbarSupportedContent ol li').removeClass("active");
+     $(this).addClass('active');
+
+     var activeWidthNewAnimHeight = $(this).innerHeight();
+     var activeWidthNewAnimWidth = $(this).innerWidth();
+     var itemPosNewAnimTop = $(this).position();
+     var itemPosNewAnimLeft = $(this).position();
+     $(".hori-selector").css({
+       "top": itemPosNewAnimTop.top + "px",
+       "left": itemPosNewAnimLeft.left + "px",
+       "height": activeWidthNewAnimHeight + "px",
+       "width": activeWidthNewAnimWidth + "px"
+     });
+   });
+ }
+
+ $(document).ready(function () {
+   setTimeout(function () {
+     test();
+   });
+
+   // Ajoutez la classe "active" à l'élément de liste correspondant à la page actuelle
+   var currentPath = window.location.pathname;
+   $("#navbarSupportedContent ol li").each(function () {
+     var href = $(this).find("a").attr("href");
+     if (href === currentPath) {
+       $(this).addClass("active");
+     }
+   });
+
+   // Définir le comportement de clic pour les éléments de la liste
+   $("#navbarSupportedContent ol li").click(function () {
+     // Supprimer la classe "active" de tous les éléments de la liste
+     $("#navbarSupportedContent ol li").removeClass("active");
+
+     // Ajouter la classe "active" à l'élément cliqué
+     $(this).addClass("active");
+   });
+ });
+
+ $(window).on('resize', function () {
+   setTimeout(function () {
+     test();
+   }, 500);
+ });
+
+ $(".navbar-toggler").click(function () {
+   $(".navbar-collapse").slideToggle(300);
+   setTimeout(function () {
+     test();
+   });
+ });
+ });
+
+
+</script>
+</div>

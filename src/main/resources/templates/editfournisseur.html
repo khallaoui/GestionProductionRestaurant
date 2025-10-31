@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <title>Bootstrap demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"  th:href="@{/bootstrap.min.css}">
+  <script type="text/javascript" th:src="@{/bootstrap.min.js}"></script>
+  <script type="text/javascript" src="@{/jquery-3.6.1.js}"></script>
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+  <meta charset="UTF-8">
+  <!----======== CSS ======== -->
+  <link rel="stylesheet" th:href="@{/styleForm.css}">
+  <link rel="stylesheet" th:href="@{/styleAddProd.css}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+  <!----===== Iconscout CSS ===== -->
+  <!----===== Iconscout CSS ===== -->
+  <!-- <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"> -->
+
+</head>
+<body>
+
+<div th:replace="navbar.html"></div>
+
+<div class="container">
+  <div th:if="${error}" class="error-message alert-danger" style="justify-content: center; width: 55%; border-radius: 4px; border-left: 6px solid #FF002D; background-color: #fffbe2; color: #FF002D; margin-left: auto; margin-right: auto; text-align: center;">
+    <i class="fa-regular fa-bell" th:if="${error}"></i>
+    <p th:text="${error}"></p>
+  </div>
+  <a type="button" class="btn-close  close pull-right" th:href="@{/fourni}"></a>
+  <header class="Dett" ><i class="fa-solid fa-truck" style="color: #864d7f"></i>Fournisseur</header>
+  <form  th:action="@{/fournisseur/{id} (id=${fournisseur.id})}" th:object="${fournisseur}" method="post">
+    <div class="form first">
+      <div class="details personal">
+        <div class="fields">
+          <div class="input-field">
+            <label >Nom</label>
+            <input type="text" th:field="*{nom}" placeholder="Enter le nom de fournisseur" >
+          </div>
+          <div class="input-field">
+            <label >Prenom</label>
+            <input type="text"   th:field="*{prenom}" placeholder="Enter le prenom de fournisseur" >
+          </div>
+          <div class="input-field">
+            <label >Telephone</label>
+            <input type="tel"   th:field="*{telephone}" placeholder="Enter le telephone de fournisseur" >
+          </div>
+          <div class="input-field">
+            <label >Ville</label>
+            <input type="text"  th:field="*{ville}" placeholder="Enter la ville de fournisseur" >
+          </div>
+          <div class="input-field">
+            <label >Code fournisseur</label>
+            <input type="text" th:field="*{code_Fournisseur}" placeholder="Enter le code fournisseur " >
+          </div>
+
+          <div class="input-field">
+            <label >Max Delai Livraison</label>
+            <input type="text" th:field="*{max_delai_livraison}" placeholder="Enter le max delai livraison " >
+          </div>
+          <div class="input-field">
+            <label >Max Delai Paiement</label>
+            <input type="text"  th:field="*{max_delai_Paiement}" placeholder="Enter le max delai paiement" >
+          </div>
+          <div class="input-field">
+            <label >Max Quantité Recommandee</label>
+            <input id="MaxQte" type="text"  th:field="*{max_quantite_Recommandee}" placeholder="Enter le max quantite recommande" >
+            <span id="MaxQteError" class="error-message"></span>
+          </div>
+          <div class="input-field">
+            <label >Min Quantité Recommandee</label>
+            <input id="MinQte" type="text"  th:field="*{min_quantite_Recommandee}" placeholder="Enter le min quantite recommande" >
+            <span id="MinQteError" class="error-message"></span>
+
+          </div>
+          <div class="input-field">
+            <label >Description</label>
+            <textarea type="text"  th:field="*{description}" style="padding : 6px" placeholder="Enter la description" ></textarea>
+          </div>
+          <div class="input-field">
+            <label>Principal</label>
+            <input type="checkbox" th:field="*{principal}">
+          </div>
+
+          <!--                    <input type="checkbox" class="form-control" id="joursDisponibles" th:field="*{joursDisponibles.id}" name="joursDisponibles">-->
+          <!--                        <th:block th:each="joursDisponibles : ${joursDisponibles}">-->
+          <!--                            <label th:value="${joursDisponibles.id}" th:text="${joursDisponibles.nom}"></label>-->
+          <!--                        </th:block>-->
+          <!--                               </input>-->
+          <div>
+
+            <label style="color:#b9d932;">Jours disponibles:</label>
+            <div th:each="jour : ${jours}">
+              <input type="checkbox" th:field="*{joursDisponibles}" th:value="${jour}" />
+              <label th:text="${jour}" style="color: #864d7f; font-size: 16px;font-weight: 500;  font-family: 'Poppins', sans-serif;" />
+            </div>
+          </div>
+          <!--                    <div th:each="i : ${#numbers.sequence(0, #lists.size(fournisseur.disponibilites) - 1)}">-->
+          <!--                        <input type="checkbox" th:field="*{disponibilites[__${i}__].disponible}" th:value="true" />-->
+          <!--                        <label th:text="${fournisseur.disponibilites[__${i}__].jour.nomjour}"></label>-->
+          <!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+          <!--                    <h4>Jours disponibles :</h4>-->
+          <!--                    <div th:each="jour : ${jours}">-->
+          <!--                        <label th:text="${jour}">-->
+          <!--                            <input type="checkbox" name="jourDisponible" th:value="${jour}" />-->
+          <!--                        </label>-->
+          <!--                    </div>-->
+
+          <!--                    <div th:each="jour : ${fournisseur.joursDisponibles}">-->
+          <!--                        <input type="checkbox" th:name="'joursDisponibles'" th:value="${jour.id}" th:checked="${jour in ${fournisseur.joursDisponibles}}" /> <label th:text="${jour.nom}" />-->
+          <!--                    </div>-->
+          <!--                    <p th:text="${fournisseur.joursDisponibles}"></p>-->
+          <!--                    <div th:each="jour : ${j}">-->
+          <!--                    <div class="input-field">-->
+          <!--                        <input type="checkbox" name="jour" id="jour" th:field="${fournisseur.fournisseurjour}" th:name="jour_id" th:text="${jour.nomjour}"  >-->
+          <!--                    </div>-->
+          <!--                    <input type="hidden" name="jourIds" value="" />-->
+          <div class="input-field"></div>
+          <div class="input-field"></div>
+          <div class="input-field" style="margin-left: 87%;">
+            <button  id="submitButton" class="nextBtn pull-right">
+              <span class="btnText">Modifier </span>
+              <i class="uil uil-navigator"></i>
+            </button>
+          </div>
+        </div> </div>
+    </div>
+
+  </form>
+</div>
+
+<script src="script.js"></script>
+</div>
+</body>
+</html>
+
+<script>
+  var MinQteInput = document.getElementById("MinQte");
+  var MaxQteInput = document.getElementById("MaxQte");
+  var MaxQteError = document.getElementById("MaxQteError");
+  var MinQteError = document.getElementById("MinQteError");
+
+  MinQteInput.addEventListener("input", validationMinQte);
+  MaxQteInput.addEventListener("input", validationMaxQte);
+
+  function validationMinQte() {
+    var MinQte = parseInt(MinQteInput.value);
+    var MaxQteValue = parseInt(MaxQteInput.value);
+
+    if (MinQte >= MaxQteValue) {
+      displayErrorMessage(MinQteInput, "La quantité minimum recommandée doit être inférieure à la quantité maximum.");
+    } else {
+      clearErrorMessage(MinQteInput);
+    }
+  }
+
+  function validationMaxQte() {
+    var MinQte = parseInt(MinQteInput.value);
+    var MaxQteValue = parseInt(MaxQteInput.value);
+
+    if (MaxQteValue <= MinQte) {
+      displayErrorMessage(MaxQteInput, "La quantité maximum doit être supérieure à la quantité minimum.");
+    } else {
+      clearErrorMessage(MaxQteInput);
+    }
+  }
+
+  function displayErrorMessage(inputElement, message) {
+    var notificationId = "notification-" + Date.now(); // Générer un identifiant unique
+    var toast = Toastify({
+      text: message,
+      duration: 5500,
+      gravity: "top",
+      backgroundColor: "red",
+      className: "toastify error-toast",
+      style: {
+        color: "white", // Couleur du texte
+        fontSize: "16px", // Taille de police
+        fontFamily: "'Poppins', sans-serif",
+        borderRadius: "5px",
+        // Poids de la police
+      },
+    }).showToast();
+    inputElement.classList.add("error");
+  }
+
+  function clearErrorMessage(inputElement) {
+    inputElement.classList.remove("error");
+  }
+
+</script>

@@ -1,0 +1,1015 @@
+<!--
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  th:href="@{/bootstrap.min.css}">
+    <script type="text/javascript" th:src="@{/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="@{/jquery-3.6.1.js}"></script>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="close.css">
+    <link rel="stylesheet" href="checkbox.css">
+
+    &lt;!&ndash;&#45;&#45;======== CSS ======== &ndash;&gt;
+    <link rel="stylesheet" href="styleAddProd.css">
+    <link rel="stylesheet" href="Button.css">
+    <script type="text/javascript" src="button.js"></script>
+    &lt;!&ndash;&#45;&#45;===== Iconscout CSS ===== &ndash;&gt;
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+<style>
+    .inputs-container {
+        margin-top: 20px;
+    }
+
+    .x {
+        display: none;
+    }
+
+</style>
+</head>
+<body>
+<div th:replace="NAvBAR :: navbar"></div>
+
+<div class="container">
+    <a type="button" class="close btn-close pull-right " href=""></a>
+    <header class="Dett" ><i class="fa-solid fa-carrot" style="color: #864d7f"></i>Ingredient</header>
+    <form   th:action="@{/PostaddProd}" method="post" th:object="${Produits}"  id="MyForm">
+        <div class="form first">
+            <div class="details personal">
+                <div class="fields">
+                    <div class="input-field">
+                        <label>Nom</label>
+                        <input type="text"  th:field="*{nom}"   placeholder="Enter le nom du ingrédient" >
+                    </div>
+
+                    <div class="input-field">
+                        <label>Unité</label>
+                        <input type="text" th:field="*{unite}"  placeholder="Enter l'unité du ingrédient" >
+                    </div>
+
+                    <div class="input-field">
+                        <label>TVA</label>
+                        <select name="tva" th:field="*{tva}"  id="tva">
+                           <option value="Aucune"  selected="select"></option>
+                            <option value="10%" selected="select">10</option>
+                            <option value="" selected="select">20</option>
+                            <option value="" selected="select">5</option>
+                        </select>
+                    </div>
+                    <div class="input-field">
+                        <label>Code barre</label>
+                        <input type="text"  th:field="*{code_barre}"  placeholder="Enter le code barre du ingréddient" >
+                    </div>
+                    <div class="input-field">
+                        <label for="categorie">Catégorie </label>
+                        <select class="form-control" id="categorie" th:field="*{categorie.id}" name="categorie">
+                            <th:block th:each="categorie : ${categories}">
+                                <option th:value="${categorie.id}" th:text="${categorie.libelle}"></option>
+                            </th:block>
+                        </select>
+
+                    </div>
+                    <div class="input-field ">
+                        <label>Le prix initial</label>
+                        <input type="number" th:field="*{prix_initial}" placeholder="Enter le prix initial de l'ingrédient" >
+                    </div>
+                    <div class="input-field"> </div>
+                    <div class="input-field">
+                        <input class="checkbox-effect checkbox-effect-4" id="make-bed-4"
+                               type="checkbox" value="make-bed-4" name="make-bed-4"/>
+                        <label for="make-bed-4">Expiration</label>
+                        </div>
+                    <div class="input-field"> </div>
+                    <label class="Det" id="toggleInputs">
+                        Plus de détails
+                    </label>
+
+                    <div class="input-field"> </div>
+
+                    &lt;!&ndash; Vos éléments d'entrée &ndash;&gt;
+                        <button class="nextBtn pull-right">
+                            <span class="btnText">Ajouter</span>
+                            <i class="uil uil-navigator"></i>
+                        </button>
+
+
+                 &lt;!&ndash;   <button class="nextBtn pull-right">
+                        <span class="btnText">Ajouter</span>
+                        <i class="uil uil-navigator"></i>
+                    </button>&ndash;&gt;
+
+
+                    <div class="input-field"> </div>
+                    <div class="input-field"> </div>
+                    <div class="input-field"> </div>
+                    <div class="input-field"> </div>
+                    <div class="input-field"> </div>
+                    <div class="input-field"> </div>
+
+                    <div class="input-field x">
+                        <label>Stock maximum</label>
+                        <input type=txt  th:field="*{stock_maximum}"  placeholder="Enter le stock maximum du ingrédient" class="stock">
+                    </div>
+                    <div class="input-field x">
+                        <label>Stock minimum</label>
+                        <input type="text"  th:field="*{stock_minimum}"  placeholder="Enter le stock minimum du ingrédient" class="stock" >
+                    </div>
+                    <div class="input-field x"></div>
+
+                    <div class="input-field x">
+                    <label>Stock en-cours</label>
+                    <input type="text"  th:field="*{stock_en_cours}" class="stock" placeholder="Enter le stock en-cours du ingrédient" >
+                </div>
+
+                    <div class="input-field x">
+                        <label>Nombre des jours apès l'ouverture</label>
+                        <input type="number" th:field="*{nbr_jr_apres_ouverture}" placeholder="Enter le nombre du jour après l'ouverture" >
+                    </div>
+                    <div class="input-field x"></div>
+                        <div class="input-field x">
+                            <label>Description</label>
+                            <textarea name="decription"th:field="*{description}" id="discription" class="form-control " cols="45" rows="8" placeholder="note"></textarea>
+                        </div>
+                        </div></div></div>
+       </form>
+</div>
+<script !src="">/*$(document).ready(function() {
+    // Masquer les éléments d'entrée au chargement de la page
+    $(".x").hide();
+
+    // Ajouter un gestionnaire d'événements sur le bouton de basculement
+    $("#toggleInputs").click(function() {
+        // Basculez la visibilité des éléments d'entrée
+        $(".x").toggle();
+
+        // Modifier le texte du bouton
+        if ($("#toggleInputs").text() == "Moins de détails") {
+            $("#toggleInputs").text("Plus de détails");
+        } else {
+            $("#toggleInputs").text("Moins de détails");
+        }
+    });
+});$(document).ready(function() {
+    // Masquer les éléments d'entrée au chargement de la page
+    $(".x").hide();
+
+    // Ajouter un gestionnaire d'événements sur le bouton de basculement
+    $("#toggleInputs").click(function() {
+        // Basculez la visibilité des éléments d'entrée
+        $(".x").toggle();
+
+        // Modifier le texte du bouton
+        if ($("#toggleInputs").text() == "Moins de détails") {
+            $("#toggleInputs").text("Plus de détails");
+            $(".nextBtn").appendTo($(".container").children().last());
+        } else {
+            $("#toggleInputs").text("Moins de détails");
+            $(".nextBtn").appendTo($(".container").children().position());
+        }
+    });
+});*/
+$(document).ready(function() {
+    // Masquer les éléments d'entrée au chargement de la page
+    $(".x").hide();
+
+    // Ajouter un gestionnaire d'événements sur le bouton de basculement
+    $("#toggleInputs").click(function() {
+        // Basculez la visibilité des éléments d'entrée
+        $(".x").toggle();
+
+        // Modifier le texte du bouton
+        if ($("#toggleInputs").text() == "Moins de détails") {
+            $("#toggleInputs").text("Plus de détails");
+        } else {
+            $("#toggleInputs").text("Moins de détails");
+        }
+    });
+});
+
+/*
+document.getElementById("MyForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Empêcher la soumission du formulaire
+    if (window.location.search.includes("modifier=true")) {
+        // Code pour la modification
+        console.log("Modification");
+    } else {
+        // Code pour l'ajout
+        console.log("Ajout");
+    }
+});
+*/
+/*
+function addRow() {
+    // Récupérer le tableau et ajouter une nouvelle ligne vide à la fin
+    var table = document.getElementById("myTable");
+    var row = table.insertRow(-1);
+
+    // Ajouter les cellules pour les champs de saisie
+    var firstNameCell = row.insertCell(0);
+    var lastNameCell = row.insertCell(1);
+    var ageCell = row.insertCell(2);
+    firstNameCell.innerHTML = "<input  class='InputTab' type='text' name='numero_lot'>";
+    lastNameCell.innerHTML = "<input  class='InputTab' type='date' name='date_expiration'>";
+    ageCell.innerHTML = "<input class='InputTab' type='text' name='qte'>";
+}*/
+</script>
+</body>
+</html>-->
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  th:href="@{/bootstrap.min.css}">
+    <script type="text/javascript" th:src="@{/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="@{/jquery-3.6.1.js}"></script>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" href="close.css">
+    <link rel="stylesheet" th:href="@{/checkbox.css}">
+    <link rel="stylesheet" th:href="@{/boxCheck.css}">
+    <link rel="stylesheet" th:href="@{/boxChecknice.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!----======== CSS ======== -->
+    <link rel="stylesheet" href="styleAddProd.css">
+    <link rel="stylesheet" href="Button.css">
+    <script type="text/javascript" src="button.js"></script>
+    <!----===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <style>
+/************//*/*/
+        nav {
+            position: relative;
+            padding-bottom: 12px;
+        }
+        nav .line {
+            height: 2px;
+            position: relative;
+            bottom: 0;
+            margin: 10px 0 0 0;
+            background: #800080;
+        }
+        nav ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            display: flex;
+        }
+        nav ul li {
+            margin: 0 40px 0 0;
+            opacity: 0.4;
+            transition: all 0.4s ease;
+        }
+        nav ul li:hover {
+            opacity: 0.7;
+
+        }
+        nav ul li.active {
+            opacity: 1;
+        }
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+        nav ul li a:hover{
+            color: #800080;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: gray;
+            text-transform: uppercase;
+            display: block;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            font-size: 17px;
+        }
+        input{
+           color: #808080;font-family: 'Poppins', sans-serif;font-size: 15px;      }
+
+        /**/
+        .inputs-container {
+            margin-top: 20px;
+        }
+
+        .x {
+            display: none;
+        }
+/***********pagination list/*/
+.pagination-list li {
+    display: none;
+}
+
+.pagination-list li.visible {
+    display: block;
+}
+.error-toast {
+    color: white;
+    font-size: 14px;
+    padding: 12px;
+}
+</style>
+</head>
+<body>
+<div th:replace="NAvBAR :: navbar"></div>
+<div class="container">
+    <a type="button" class="close btn-close pull-right " th:href="@{/listProduits}"></a>
+    <header class="Dett" ><i class="fa-solid fa-carrot" style="color: #864d7f"></i>Ingredient</header>
+    <form   th:action="@{/PostaddProd}" method="post" th:object="${Produits}"  id="MyForm">
+        <div class="form first">
+            <div class="details personal">
+                <div class="fields">
+                    <div class="input-field">
+                        <label>Nom</label>
+                        <input  type="text" th:field="*{nom}"  placeholder="Enter le nom du ingrédient" required>
+                    </div>
+
+                    <div class="input-field">
+                        <label>Unité</label>
+                        <input type="text" th:field="*{unite}" placeholder="Enter l'unité du ingrédient" required>
+                    </div>
+                    <div class="input-field">
+                        <label>Prix initial</label>
+                        <input type="text" th:field="*{prix_initial}"  placeholder="Enter le prix initial du ingréddient" required>
+                    </div>
+                <!--    <div class="input-field">
+                        <label>TVA</label>
+                        <select name="tva" th:field="*{tva}"  id="tva">
+                            <option value="0"  selected="select">Aucune</option>
+                            <option value="10" selected="select">10%</option>
+                            <option value="20" selected="select">20%</option>
+                            <option value="5" selected="select">5%</option>
+                        </select>
+                    </div>-->
+                    <div class="input-field">
+                        <label>Code barre</label>
+                        <input type="text" th:field="*{code_barre}"  placeholder="Enter le code barre du ingréddient" >
+                    </div>
+
+                    <div class="input-field" style="margin-top: 1.2%">
+                        <label for="categorie">Catégorie</label>
+                        <select  id="categorie" th:field="*{categorie.id}" name="categorie">
+                            <th:block th:each="categorie : ${categories}">
+                                <option th:value="${categorie.id}" th:text="${categorie.libelle}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+                    <div class="input-field"></div>
+
+                    <div class="input-field" style="margin-top: 4%">
+                        <input class="checkbox-effect checkbox-effect-4" id="make-bed-4"
+                               type="checkbox" value="make-bed-4" name="make-bed-4"/>
+                        <label for="make-bed-4">Avec expiration</label>
+                    </div>
+                    <div class="input-field"> </div>
+
+                    <!-- Vos éléments d'entrée -->
+                    <button  id="submitButton" class="nextBtn pull-right">
+                        <span class="btnText">Ajouter </span>
+                        <i class="uil uil-navigator"></i>
+                    </button>
+                    <div class="input-field"> </div>
+                    <div class="input-field"> </div>
+                    <div class="input-field"> </div>
+                    <nav >
+                        <ul>
+
+                            <li id="toggleInputs3"><a href="">Zones de stockage</a></li>
+                            <li style="opacity: 1" id="toggleInputs2" ><a href="">LES LOTS</a></li>
+                            <li id="toggleInputs"><a href="">Détails</a></li>
+
+                        </ul>
+                    </nav>
+                    <div class="input-field"> </div>
+                    <div class="input-field"> </div>
+                    <div class="input-field"> </div>
+                    <div class="input-field"> </div>
+
+                    <div class="input-field x">
+                        <label>Stock minimum</label>
+                        <input type="text" id="stockMinimum" placeholder="Entrez le stock minimum de l'ingrédient" class="stock" required>
+                        <span id="stockMinimumError" class="error-message"></span>
+                    </div>
+                    <div class="input-field x">
+                        <label>Stock maximum</label>
+                        <input type="text" id="stockMaximum" placeholder="Entrez le stock maximum de l'ingrédient" class="stock" required>
+                        <span id="stockMaximumError" class="error-message" value="Le stock maximum doit être"> </span>
+                    </div>
+                    <div class="input-field x"></div>
+                    <div class="input-field x">
+                        <label>Stock en cours</label>
+                        <input type="text" id="stockEnCours" placeholder="Entrez le stock en cours de l'ingrédient" class="stock" required>
+                        <span id="stockEnCoursError" class="error-message "></span>
+                    </div>
+
+
+                    <div class="input-field x">
+                        <label>Nombre des jours apès l'ouverture</label>
+                        <input type="number" th:field="*{nbr_jr_apres_ouverture}"  placeholder="Enter le nombre du jour après l'ouverture" required>
+                    </div>
+                    <div class="input-field x"></div>
+                            <div class="  input-field x">
+                                <label>Description</label>
+                                <textarea th:field="*{description}" name="decription" id="description" class="form-control col-md-2" cols="45" rows="8" placeholder="note"></textarea>
+                            </div>
+
+                     <div class="input-field x">
+
+                        <div class="list input-field" style="margin-top: 6%">
+                            <ul class="pagination-list">
+                                <label style=" color:#800080; ">Liste des marques</label>
+                                <li th:each="marque, index : ${marques}">
+                                    <input th:id="'marque_' + ${index}" type="checkbox" th:value="${marque.id}" th:name="marqueId">
+                                    <label th:for="'marque_' + ${index}" class="text" th:text="${marque.libelle}"></label>
+                                    <label th:for="'marque_' + ${index}" class="button"></label>
+                                    <div class="wrapper">
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 98.5 98.5" enable-background="new 0 0 98.5 98.5" xml:space="preserve">
+                        <path class="checkmark" fill="none" stroke-width="8" stroke-miterlimit="10" d="M81.7,17.8C73.5,9.3,62,4,49.2,4 C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3" />
+                    </svg>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                   <!-- <div class="x pagination-buttons">
+                        <label style="color: black" class=" prev">Précédent</label>
+                        <label class=" next">Suivant</label>
+                    </div>-->
+
+                            <!-- <div class="  input-field list x ">
+                                 <ul class=" ">
+                                     <li>
+                                         <input type="checkbox" id="item-1" name="item-1">
+                                         <label for="item-1" class="text">Create a list</label>
+                                         <label for="item-1" class="button"></label>
+                                         <div class="wrapper">
+                                             <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                  viewBox="0 0 98.5 98.5" enable-background="new 0 0 98.5 98.5" xml:space="preserve">
+           <path class="checkmark" fill="none" stroke-width="8" stroke-miterlimit="10" d="M81.7,17.8C73.5,9.3,62,4,49.2,4
+             C24.3,4,4,24.3,4,49.2s20.3,45.2,45.2,45.2s45.2-20.3,45.2-45.2c0-8.6-2.4-16.6-6.5-23.4l0,0L45.6,68.2L24.7,47.3"/>
+         </svg>
+                                         </div>
+                                     </li>
+                                 </ul>
+                             </div></div>-->
+              <!--   <div class="x" th:each="marque, index : ${marques}">
+                        <input class="checkbox-effect checkbox-effect-4" th:id="'marque_' + ${index}"
+                               type="checkbox" th:value="${marque.id}" th:name="marqueId"/>
+                        <label th:for="'marque_' + ${index}" th:text="${marque.libelle}"></label>
+                    </div>-->
+               <!--     <div class=" input-field x">
+                        <div th:each="marque, index : ${marques}" style="display: block; margin-bottom: 10px;">
+                            <input class="checkbox-effect checkbox-effect-4" th:id="'marque_' + ${index}"
+                                   type="checkbox" th:value="${marque.id}" th:name="marqueId"/>
+                            <label th:for="'marque_' + ${index}" th:text="${marque.libelle}" style="vertical-align: top;"></label>
+                        </div>
+                    </div>
+
+-->
+
+                    <!--checkbox 1-->
+                    <div class="input-field xx"></div>
+                    <div style="display: inline-block;" class="xx justify-content-center">
+                            <div class="containerTab pull-right justify-content-center" style="margin-left: 1%;margin-top: 3%">
+                    <table class="table" style="position: relative" id="myTable">
+                        <thead>
+                                    <tr style="color: #b9d932;font-family: 'Poppins', sans-serif;font-size: 14px">
+                                        <th scope="">N° Lot</th>
+                                        <th scope="">Date d'areivée</th>
+                                        <th scope="">Date d'éxpiration</th>
+                                        <th scope="">Quantité</th>
+                                        <th scope="">Nombre du jour</th>
+                                        <th scope="">Description</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><input class='InputTab xx' type="text" name="lots[0].numero_Lot"></td>
+                                        <td><input class='InputTab xx' type="date"   style="color: grey" name="lots[0].date_arrivee_lot"></td>
+                                        <td><input class='InputTab xx' type="date"   style="color: grey" name="lots[0].date_expiration"></td>
+                                        <td><input class='InputTab xx' type="text"   name="lots[0].qte"></td>
+                                        <td><input class='InputTab xx' type="text"   name="lots[0].nbr_jr_avant_Expiration"></td>
+                                        <td><input class='InputTab xx' type="text"   name="lots[0].description"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <label class="Det" onclick="addRow()">Ajouter une ligne</label>
+                            </div>
+                        </div>
+                    <div style="display: inline-block;" class="y justify-content-center">
+                        <div class="containerTab pull-right " style="text-align: left; justify-content: left; margin-top: 3%">
+                            <table class="table" style="position: relative" id="TableZone">
+                                <thead>
+                                <tr style="color: #b9d932;font-family: 'Poppins', sans-serif;font-size: 14px">
+                                    <th scope="">Designation</th>
+                                    <th scope="">Quantité</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><select  class="InputTab" id="zone" name="ZoneId">
+                                        <th:block th:each="zone : ${Zones}">
+                                            <option name="zone.designatioon" th:value="${zone.id}" th:text="${zone.designation}" ></option>
+                                        </th:block>
+                                    </select>
+                                        </td>
+                                    <td>
+                                        <div class="input-field"><input th:value="${ZoneProduit.qte_Produit}" type="text" name="qte_Produit">
+                        </div>
+                                </tr>
+                                <label class="Det" onclick="addRow1()">Ajouter une ligne</label>
+                        </tbody>
+                            </table>
+                </div>
+                </div>
+                </div></div></div>
+    </form>
+</div>
+<script !src="">
+/*****************************************/
+$(document).ready(function() {
+    // Masquer les éléments d'entrée au chargement de la page
+    $(".x, .xx,.y").hide();
+
+    // Ajouter un gestionnaire d'événements sur le bouton "Détails"
+    $("#toggleInputs").click(function() {
+        // Masquer les éléments de la classe "xx"
+        $(".xx").hide(); $(".y").hide();
+        // Afficher les éléments de la classe "x"
+        $(".x").show();
+    });
+
+    // Ajouter un gestionnaire d'événements sur le bouton "Les lots"
+    $("#toggleInputs2").click(function() {
+        // Masquer les éléments de la classe "x"
+        $(".x").hide();    $(".y").hide();
+        // Afficher les éléments de la classe "xx"
+        $(".xx").show();
+    });
+    $("#toggleInputs3").click(function() {
+        // Masquer les éléments de la classe "x"
+        $(".x").hide();    $(".xx").hide();
+        // Afficher les éléments de la classe "xx"
+        $(".y").show();
+    });
+});
+
+/***********************************************/
+/***********************************************/
+var nav = $('nav');
+var line = $('<div />').addClass('line');
+
+line.appendTo(nav);
+
+var active = nav.find('.active');
+var pos = 0;
+var wid = 0;
+
+if(active.length) {
+    pos = active.position().left;
+    wid = active.width();
+    line.css({
+        left: pos,
+        width: wid
+    });
+}
+
+nav.find('ul li a').click(function(e) {
+    e.preventDefault();
+    if(!$(this).parent().hasClass('active') && !nav.hasClass('animate')) {
+
+        nav.addClass('animate');
+
+        var _this = $(this);
+
+        nav.find('ul li').removeClass('active');
+
+        var position = _this.parent().position();
+        var width = _this.parent().width();
+
+        if(position.left >= pos) {
+            line.animate({
+                width: ((position.left - pos) + width)
+            }, 300, function() {
+                line.animate({
+                    width: width,
+                    left: position.left
+                }, 150, function() {
+                    nav.removeClass('animate');
+                });
+                _this.parent().addClass('active');
+            });
+        } else {
+            line.animate({
+                left: position.left,
+                width: ((pos - position.left) + wid)
+            }, 300, function() {
+                line.animate({
+                    width: width
+                }, 150, function() {
+                    nav.removeClass('animate');
+                });
+                _this.parent().addClass('active');
+            });
+        }
+
+        pos = position.left;
+        wid = width;
+    }
+});
+function addRow() {
+    var tableBody = document.querySelector("#myTable tbody");
+    var rowCount = tableBody.rows.length;
+
+    var newRow = tableBody.insertRow(rowCount);
+
+    var cell1 = newRow.insertCell(0);
+    var cell2 = newRow.insertCell(1);
+    var cell3 = newRow.insertCell(2);
+    var cell4 = newRow.insertCell(3);
+    var cell5 = newRow.insertCell(4);
+    var cell6 = newRow.insertCell(5);
+
+    cell1.innerHTML = '<input class="InputTab xx" type="text" name="lots[' + rowCount + '].numero_Lot">';
+    cell2.innerHTML = '<input class="InputTab xx" type="date" style="color: grey" name="lots[' + rowCount + '].date_arrivee_lot">';
+    cell3.innerHTML = '<input class="InputTab xx" type="date" style="color: grey" name="lots[' + rowCount + '].date_expiration">';
+    cell4.innerHTML = '<input class="InputTab xx" type="text" name="lots[' + rowCount + '].qte">';
+    cell5.innerHTML = '<input class="InputTab xx" type="text" name="lots[' + rowCount + '].nbr_jr_avant_Expiration">';
+    cell6.innerHTML = '<input class="InputTab xx" type="text" name="lots[' + rowCount + '].description">';
+
+    // Attacher les écouteurs d'événements aux nouveaux champs
+    var newQteInput = newRow.querySelector('.InputTab[name="lots[' + rowCount + '].qte"]');
+    newQteInput.addEventListener("input", calculateCumulativeQuantity);
+}
+function addRow1() {
+    // Récupérer le tableau
+    var table = document.getElementById("TableZone");
+
+    // Récupérer la dernière ligne existante
+    var lastRow = table.rows[table.rows.length - 1];
+
+    // Dupliquer la dernière ligne
+    var newRow = lastRow.cloneNode(true);
+
+    // Effacer les valeurs saisies dans la nouvelle ligne
+    var inputs = newRow.querySelectorAll("input");
+    inputs.forEach(function(input) {
+        input.value = "";
+    });
+
+    // Ajouter la nouvelle ligne à la fin du tableau
+    table.appendChild(newRow);
+}
+
+/*
+
+// Récupérer les éléments nécessaires
+const list = document.querySelector(".list ul");
+const items = Array.from(list.querySelectorAll(".pagination-list li"));
+const prevLabel = document.querySelector(".pagination .prev");
+const nextLabel = document.querySelector(".pagination .next");
+
+// Variables de pagination
+let currentPage = 1;
+
+// Fonction pour afficher la page spécifique
+function showPage(pageNumber, pageSize) {
+    // Calculer l'indice de début et de fin des éléments à afficher
+    const startIndex = (pageNumber - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+
+    // Parcourir tous les éléments et les afficher ou les masquer en fonction de l'indice
+    items.forEach((item, index) => {
+        if (index >= startIndex && index < endIndex) {
+            item.style.display = "block";
+        } else {
+            item.style.display = "none";
+        }
+    });
+
+    // Mettre à jour le numéro de page actuel
+    currentPage = pageNumber;
+
+    // Gérer l'état des liens précédent/suivant
+    updatePaginationLinks();
+}
+
+// Fonction pour mettre à jour l'état des liens précédent/suivant
+function updatePaginationLinks() {
+    // Activer/désactiver le lien précédent en fonction de la page actuelle
+    if (currentPage === 1) {
+        prevLabel.classList.add("disabled");
+    } else {
+        prevLabel.classList.remove("disabled");
+    }
+
+    // Activer/désactiver le lien suivant en fonction de la page actuelle
+    if (currentPage === getTotalPages()) {
+        nextLabel.classList.add("disabled");
+    } else {
+        nextLabel.classList.remove("disabled");
+    }
+}
+
+// Fonction pour obtenir le nombre total de pages
+function getTotalPages() {
+    return Math.ceil(items.length / pageSize);
+}
+
+// Gestionnaire d'événement pour le lien précédent
+prevLabel.addEventListener("click", function (event) {
+    event.preventDefault();
+    if (currentPage > 1) {
+        showPage(currentPage - 1);
+    }
+});
+
+// Gestionnaire d'événement pour le lien suivant
+nextLabel.addEventListener("click", function (event) {
+    event.preventDefault();
+    if (currentPage < getTotalPages()) {
+        showPage(currentPage + 1);
+    }
+});
+
+// Appeler la fonction showPage au chargement de la page avec la page 1
+document.addEventListener("DOMContentLoaded", function() {
+    showPage(1,3);
+});
+*/
+//////////////////////////li khadama*/
+// Récupérer les éléments nécessaires
+/*
+const list = document.querySelector(".list ul");
+const items = Array.from(list.getElementsByTagName("li"));
+const prevLabel = document.querySelector(" .prev");
+const nextLabel = document.querySelector(" .next");
+
+// Fonction pour afficher la page spécifique
+function showPage(pageNumber, pageSize) {
+    // Calculer l'indice de début et de fin des éléments à afficher
+    const startIndex = (pageNumber - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+
+    // Parcourir tous les éléments et les afficher ou les masquer en fonction de l'indice
+    items.forEach((item, index) => {
+        if (index >= startIndex && index < endIndex) {
+            item.style.display = "block";
+        } else {
+            item.style.display = "none";
+        }
+    });
+}
+
+// Appeler la fonction showPage au chargement de la page avec les paramètres souhaités
+document.addEventListener("DOMContentLoaded", function() {
+    showPage(1, 5); // Afficher la première page avec 5 éléments par page
+});
+*/var stockMinimumInput = document.getElementById("stockMinimum");
+var stockMaximumInput = document.getElementById("stockMaximum");
+var stockEnCoursInput = document.getElementById("stockEnCours");
+var stockMinimumError = document.getElementById("stockMinimumError");
+var stockMaximumError = document.getElementById("stockMaximumError");
+var stockEnCoursError = document.getElementById("stockEnCoursError");
+
+stockMinimumInput.addEventListener("input", validateStockMinimum);
+stockMaximumInput.addEventListener("input", validateStockMaximum);
+stockEnCoursInput.addEventListener("input", validateStockEnCours);
+
+function validateStockMinimum() {
+    var stockMinimum = parseInt(stockMinimumInput.value);
+    var stockMaximum = parseInt(stockMaximumInput.value);
+
+    if (stockMinimum >= stockMaximum) {
+        displayErrorMessage(stockMinimumInput, "Le stock minimum doit être inférieur au stock maximum.");
+    } else {
+        clearErrorMessage(stockMinimumInput);
+    }
+}
+
+function validateStockMaximum() {
+    var stockMinimum = parseInt(stockMinimumInput.value);
+    var stockMaximum = parseInt(stockMaximumInput.value);
+    var stockEnCours = parseInt(stockEnCoursInput.value);
+
+    if (stockMaximum <= stockMinimum || stockMaximum <= stockEnCours) {
+        displayErrorMessage(stockMaximumInput, "Le stock maximum doit être supérieur au stock minimum et au stock en cours.");
+    } else {
+        clearErrorMessage(stockMaximumInput);
+    }
+}
+
+function validateStockEnCours() {
+    var stockMaximum = parseInt(stockMaximumInput.value);
+    var stockEnCours = parseInt(stockEnCoursInput.value);
+
+    if (stockEnCours > stockMaximum) {
+        displayErrorMessage(stockEnCoursInput, "Le stock en cours doit être inférieur ou égal au stock maximum.");
+    } else {
+        clearErrorMessage(stockEnCoursInput);
+    }
+}
+
+function displayErrorMessage(inputElement, message) {
+    var notificationId = "notification-" + Date.now(); // Générer un identifiant unique
+    var toast = Toastify({
+        text: message,
+        duration: 5500,
+        gravity: "top",
+        backgroundColor: "red",
+        className: "toastify  error-toast",
+        style: {
+            color: "white", // Couleur du texte
+            fontSize: "16px", // Taille de police
+            fontFamily: "'Poppins', sans-serif",
+            borderRadius:"5px",
+            // Poids de la police
+        },
+    }).showToast();
+    inputElement.classList.add("error");
+}
+var dateArriveeInput = document.querySelector('input[name="lots[0].date_arrivee_lot"]');
+var dateExpirationInput = document.querySelector('input[name="lots[0].date_expiration"]');
+
+dateArriveeInput.addEventListener("input", validateDates);
+dateExpirationInput.addEventListener("input", validateDates);
+
+function validateDates() {
+    var dateArrivee = new Date(dateArriveeInput.value);
+    var dateExpiration = new Date(dateExpirationInput.value);
+
+    if (dateArrivee >= dateExpiration) {
+        displayErrorMessage(dateArriveeInput, "La date d'arrivée doit être inférieure à la date d'expiration.");
+    } else {
+        clearErrorMessage(dateArriveeInput);
+    }
+}
+
+function clearErrorMessage(inputElement) {
+    Toastify.hideToast();
+    inputElement.classList.remove("error");
+}
+
+var qteInputs = document.querySelectorAll('.InputTab[name^="lots["][name$="].qte"]');
+var stockEnCoursInput = document.getElementById("stockEnCours");
+
+// Ajouter l'écouteur d'événements "input" à chaque champ de quantité de produit
+qteInputs.forEach(function(input) {
+    input.addEventListener("input", calculateCumulativeQuantity);
+});
+
+// Ajouter l'écouteur d'événements "input" au champ de stock en cours
+stockEnCoursInput.addEventListener("input", calculateCumulativeQuantity);
+
+function calculateCumulativeQuantity() {
+    var cumulativeQuantity = 0;
+
+    qteInputs = document.querySelectorAll('.InputTab[name^="lots["][name$="].qte"]');
+
+    qteInputs.forEach(function(input) {
+        var quantity = parseInt(input.value);
+        if (!isNaN(quantity)) {
+            cumulativeQuantity += quantity;
+        }
+    });
+
+    var stockEnCours = parseInt(stockEnCoursInput.value);
+    if (cumulativeQuantity > stockEnCours) {
+        displayErrorMessage(stockEnCoursInput, "La somme de la quantité de votre lots depassent la quantité en stock.");
+    } else {
+        clearErrorMessage(stockEnCoursInput);
+    }
+    return cumulativeQuantity;
+
+}
+
+/************Validation de form ***************/
+var submitButton = document.getElementById("submitButton");
+submitButton.addEventListener("click", validateForm);
+
+function validateForm(event) {
+    var stockEnCours = parseInt(stockEnCoursInput.value);
+    var cumulativeQuantity = calculateCumulativeQuantity();
+    var stockMinimum = parseInt(stockMinimumInput.value);
+    var stockMaximum = parseInt(stockMaximumInput.value);
+
+    if (cumulativeQuantity > stockEnCours) {
+        displayErrorMessage(stockEnCoursInput, "OOps, mais vous devez gérer les quantités de vos lots car ils depassent la quantite de stock en cours.");
+        event.preventDefault(); // Empêche l'envoi du formulaire
+    } else {
+        clearErrorMessage(stockEnCoursInput);
+        // Le formulaire peut être envoyé normalement
+    }
+
+    var dateArrivee = new Date(dateArriveeInput.value);
+    var dateExpiration = new Date(dateExpirationInput.value);
+
+    if (dateArrivee >= dateExpiration) {
+        displayErrorMessage(dateArriveeInput, "Vous devez vérifier La date d'arrivée du lot");
+    } else {
+        clearErrorMessage(dateArriveeInput);
+    }
+    if (stockMaximum <= stockMinimum || stockMaximum < stockEnCours) {
+        displayErrorMessage(stockMaximumInput, "Vous devez vérifier encours  la quantité de stock maximum.  ");
+        event.preventDefault();
+    } else {
+        clearErrorMessage(stockMaximumInput);
+    }
+
+    if (stockMinimum >= stockMaximum) {
+        displayErrorMessage(stockMinimumInput, "Vous devez vérifier encours  la quantité de stock minimum.");
+        event.preventDefault();
+    } else {
+        clearErrorMessage(stockMinimumInput);
+    }
+
+    if (stockEnCours > stockMaximum) {
+        displayErrorMessage(stockEnCoursInput, "Vous devez vérifier encours  la quantité de stock en cours");
+        event.preventDefault();
+    } else {
+        clearErrorMessage(stockEnCoursInput);
+    }
+}
+/***********************Cumule selon la zone **************/
+
+var qteProduitInput = document.querySelector('input[name="qte_Produit"]');
+var stockEnCoursInput = document.getElementById("stockEnCours");
+
+// Ajouter l'écouteur d'événements "input" à chaque champ de quantité de produit
+qteProduitInput.forEach(function(input) {
+    input.addEventListener("input", calculateCumulativeQuantityZone);
+});
+
+// Ajouter l'écouteur d'événements "input" au champ de stock en cours
+stockEnCoursInput.addEventListener("input", calculateCumulativeQuantityZone);
+
+function calculateCumulativeQuantityZone() {
+    var cumulativeQuantity = 0;
+
+    qteProduitInput = document.querySelectorAll('input[name="qte_Produit"]');
+
+    qteProduitInput.forEach(function(input) {
+        var quantity = parseInt(input.value);
+        if (!isNaN(quantity)) {
+            cumulativeQuantity += quantity;
+        }
+    });
+
+    var stockEnCours = parseInt(stockEnCoursInput.value);
+    if (cumulativeQuantity > stockEnCours) {
+        displayErrorMessage(stockEnCoursInput, "La somme de la quantité de votre Zone depassent la quantité en stock.");
+    } else {
+        clearErrorMessage(stockEnCoursInput);
+    }
+    return cumulativeQuantity;
+
+}
+</script>
+</body>
+</html>
+<!--
+/*$(document).ready(function() {
+// Masquer les éléments d'entrée au chargement de la page
+$(".x").hide();
+
+// Ajouter un gestionnaire d'événements sur le bouton de basculement
+$("#toggleInputs").click(function() {
+// Basculez la visibilité des éléments d'entrée
+$(".x").toggle();
+
+// Modifier le texte du bouton
+if ($("#toggleInputs").text() == "Moins de détails") {
+$("#toggleInputs").text("Plus de détails");
+} else {
+$("#toggleInputs").text("Moins de détails");
+}
+});
+});$(document).ready(function() {
+// Masquer les éléments d'entrée au chargement de la page
+$(".x").hide();
+
+// Ajouter un gestionnaire d'événements sur le bouton de basculement
+$("#toggleInputs").click(function() {
+// Basculez la visibilité des éléments d'entrée
+$(".x").toggle();
+
+// Modifier le texte du bouton
+if ($("#toggleInputs").text() == "Moins de détails") {
+$("#toggleInputs").text("Plus de détails");
+$(".nextBtn").appendTo($(".container").children().last());
+} else {
+$("#toggleInputs").text("Moins de détails");
+$(".nextBtn").appendTo($(".container").children().position());
+}
+});
+});*/-->

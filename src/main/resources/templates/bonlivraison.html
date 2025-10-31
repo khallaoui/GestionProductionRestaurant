@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title> Bon Reception  </title>
+  <style>
+    .invoice-box {
+      max-width: 800px;
+      margin: auto;
+      padding: 30px;
+      border: 1px solid #eee;
+      box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+      font-size: 16px;
+      line-height: 24px;
+      font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+      color: #555;
+    }
+    .invoice-box table {
+      width: 100%;
+      line-height: inherit;
+      text-align: left;
+    }
+    .invoice-box table td {
+      padding: 5px;
+      vertical-align: top;
+    }
+    .invoice-box table tr td:nth-child(2) {
+      text-align: right;
+    }
+    .invoice-box table tr.top table td {
+      padding-bottom: 20px;
+    }
+    .invoice-box table tr.top table td.title {
+      color: #333;
+    }
+    .invoice-box table tr.information table td {
+      padding-bottom: 40px;
+    }
+    .invoice-box table tr.heading td {
+      background: #eee;
+      border-bottom: 1px solid #ddd;
+      font-weight: bold;
+    }
+    .invoice-box table tr.details td {
+      padding-bottom: 20px;
+    }
+    .invoice-box table tr.item td {
+      border-bottom: 1px solid #eee;
+    }
+    .invoice-box table tr.item.last td {
+      border-bottom: none;
+    }
+    .invoice-box table tr.total td:nth-child(2) {
+      border-top: 2px solid #eee;
+      font-weight: bold;
+    }
+    @media only screen and (max-width: 600px) {
+      .invoice-box table tr.top table td {
+        width: 100%;
+        display: block;
+        text-align: center;
+      }
+      .invoice-box table tr.information table td {
+        width: 100%;
+        display: block;
+        text-align: center;
+      }
+    }
+    /** RTL **/
+    .rtl {
+      direction: rtl;
+      font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    }
+    .rtl table {
+      text-align: right;
+    }
+    .rtl table tr td:nth-child(2) {
+      text-align: left;
+    }
+    .logo-cell {
+      width: 120px;
+      height: 120px;
+      text-align: left;
+    }
+
+    .logo-image {
+      width: 120%;
+      max-height: 170px;
+      padding-left: 0%;
+    }
+
+    .title {
+      text-align: left;
+    }
+
+    .invoice-type {
+      text-align: right;
+    }
+
+    .address-cell, .gap-puc-cell {
+      text-align: left;
+    }
+    .name-container {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .first-name {
+      margin-right: 10px;
+    }
+    .gap-puc-cell p {
+      margin: 0;
+    }
+
+    /*  display: flex;*/
+    /*  flex-direction: column;*/
+    /*  align-items: flex-start;*/
+    /*}*/
+
+    /*.gap-puc-cell {*/
+    /*  display: flex;*/
+    /*  flex-direction: column;*/
+    /*  align-items: flex-start;*/
+    /*}*/
+
+
+
+
+  </style>
+  <script>
+    function printPage() {
+      var printButton = document.getElementById('printButton');
+      printButton.style.display = 'none'; // Masquer le bouton d'impression
+      window.print(); // Imprimer la page
+      printButton.style.display = 'block'; // Réafficher le bouton d'impression après l'impression
+    }
+  </script>
+</head>
+<body>
+<div class="invoice-box">
+  <div class="download-btn">
+    <button id="printButton" onclick="printPage()">Imprimer</button>
+  </div>
+  <form th:object="${bon_recep}" method="get">
+    <table cellpadding="0" cellspacing="0">
+      <tbody>
+      <tr class="top">
+        <td colspan="3">
+
+          <table>
+            <tbody>
+            <tr>
+              <td class="logo-cell" style="vertical-align: middle;">
+                <img src="/logo.jpg" alt="Logo de la société" class="logo-image" />
+              </td>
+              <td class="title" colspan="2" style="padding-left: 20px;">
+                <br><br>
+
+                <h2 style="margin-top: 0; margin-right: 100px">Bon de Réception N°<span th:text="${bon_recep.numero_bon_annee}"></span></h2>
+              </td>
+            </tr>
+
+            <tr>
+
+              <td colspan="2" class="address-cell">
+                <br><br><br><br>
+
+                <strong>Date commande :</strong> <span th:text="${bon_recep.date_commande}"></span><br>
+
+                <strong>Date livraison :</strong> <span th:text="${bon_recep.date_livraison}"></span>
+                <br><br>
+
+
+                <p>ProdChef<br> infos@prodchef.ma | www.prodchef.ma <br> Bureau N:3 R plaisance Av yaakoub el Mansour Kenitra
+                  <br> Capital : 100 000 Dhs-IF : 25054239-RC: 48843 - CNSS : <br>
+                  5810214 - TP : 20161991 - ICE : 001954025000013 </p>
+              </td>
+              <td class="gap-puc-cell" style="display: flex; text-align: left">
+                <p><strong>De :</strong> <span class="name-container"><span class="first-name" th:text="${bon_recep.fournisseur.nom}"></span><span th:text="${bon_recep.fournisseur.prenom}"></span></span><br>
+                  <strong>Code fournisseur :</strong> <span th:text="${bon_recep.fournisseur.code_Fournisseur}"></span><br>
+                  <strong>Ville:</strong> <span th:text="${bon_recep.fournisseur.ville}"></span><br>
+                  <strong>Telephone :</strong> <span th:text="${bon_recep.fournisseur.telephone}"></span></p>
+              </td>
+
+
+
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+
+      </tbody>
+    </table>
+    <table>
+      <tbody>
+      <tr class="heading">
+        <td>Nom produit</td>
+        <td>Quantite livree</td>
+        <td>Prix d'achat</td>
+        <td>Unite</td>
+      </tr>
+      <tr  class="item" th:each="lignereception : ${ligneReceptions}" th:data-id="${lignereception.id}">
+        <td th:text="${lignereception.produit.nom}"></td>
+        <td style="color: gray" th:text="${lignereception.quantite_livree}"></td>
+        <td style="color: gray" th:text="${lignereception.prix_achat}"></td>
+        <td style="color: gray" th:text="${lignereception.unite}"></td></tr>
+      </tbody>
+    </table>
+    <br><br><br>
+    <td class="gap-puc-cell" style="display: flex; text-align: left">
+      <strong>Montant total :</strong> <span th:text="${bon_recep.total_HT + ' DH'}"></span><br>
+      <strong>Versement :</strong> <span th:text="${bon_recep.versement + ' DH'}"></span><br>
+    </td>
+
+
+
+
+
+  </form>
+</div>
+</body>
+</html>
+

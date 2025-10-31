@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Bootstrap demo</title>
+  <link rel="stylesheet"  th:href="@{/bootstrap.min.css}">
+  <script type="text/javascript" th:src="@{/bootstrap.min.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" />
+  <link rel="stylesheet"
+        href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css" />
+  <link rel="stylesheet" th:href="@{/chercher.css}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /******************** les style de table */
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+    /*add button*/
+
+    .main-hr {
+      width: 30%;
+      border: none;
+      border-top: 1px solid #c3c3c3;
+    }
+    .icon-btn {
+      width: 50px;
+      height: 50px;
+      border: 2px solid #cdcdcd;
+      background: white;
+      border-radius: 25px;
+      overflow: hidden;
+      position: relative;
+      transition: width 0.2s ease-in-out;
+    }
+    .add-btn:hover {
+      width: 120px;
+    }
+    .add-btn::before,
+    .add-btn::after {
+      transition: width 0.2s ease-in-out, border-radius 0.2s ease-in-out;
+      content: "";
+      position: absolute;
+      height: 4px;
+      width: 10px;
+      top: calc(50% - 2px);
+      background: #b9d932;
+    }
+    .add-btn::after {
+      right: 14px;
+      overflow: hidden;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+    .add-btn::before {
+      left: 14px;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+    }
+    .icon-btn:focus {
+      outline: none;
+    }
+    .btn-txt {
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .add-btn:hover::before,
+    .add-btn:hover::after {
+      width: 4px;
+      border-radius: 2px;
+    }
+    .add-btn:hover .btn-txt {
+      opacity: 1;
+    }
+    .add-icon::after,
+    .add-icon::before {
+      transition: all 0.2s ease-in-out;
+      content: "";
+      position: absolute;
+      height: 20px;
+      width: 3px;
+      top: calc(50% - 10px);
+      background: #b9d932;
+      overflow: hidden;
+    }
+    .add-icon::before {
+      left: 22px;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+    }
+    .add-icon::after {
+      right: 22px;
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+    .add-btn:hover .add-icon::before {
+      left: 15px;
+      height: 4px;
+      top: calc(50% - 2px);
+    }
+    .add-btn:hover .add-icon::after {
+      right: 15px;
+      height: 4px;
+      top: calc(50% - 2px);
+    }
+    /********************/
+    .backBtn{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 45px;
+      max-width: 200px;
+      width: 100%;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 18px;
+      border-radius: 5px;
+      margin: 25px 0;
+      color:#b9d932;
+
+      background-color: #A18594;
+      transition: all 0.3s linear;
+      cursor: pointer;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.42em;
+      color:#A7A1AE;
+      background-color:#ffffff;
+    }
+
+    h1 {
+      font-size:3em;
+      font-weight: 300;
+      line-height:1em;
+      text-align: center;
+      color: #4DC3FA;
+    }
+
+    h2 {
+      font-size:1em;
+      font-weight: 300;
+      text-align: center;
+      display: block;
+      line-height:1em;
+      padding-bottom: 2em;
+      color: #FB667A;
+    }
+
+    h2 a {
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #FB667A;
+      text-decoration: none;
+    }
+
+    .blue { color: #185875; }
+    .yellow { color: #FFF842; }
+
+    .container th h1 {
+      font-weight: bold;
+      font-size: 1em;
+      text-align: left;
+      color: #ffffff;
+    }
+    .container td {
+      font-weight: normal;
+      font-size: 1em;
+      /* -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+       -moz-box-shadow: 0 2px 2px -2px #0E1119;
+       box-shadow: 0 2px 2px -2px #0E1119;*/
+    }
+    .container {
+      text-align: left;
+      overflow: hidden;
+      width: 80%;
+      margin: 0 auto;
+      display: table;
+      padding: 0 0 8em 0;
+    }
+
+    .container td, .container th {
+      padding-bottom: 2%;
+      padding-top: 2%;
+      padding-left:2%;
+    }
+
+    /* Background-color of the odd rows */
+    .container tr:nth-child(odd) {
+      background-color: #ffffff;
+    }
+
+    /* Background-color of the even rows */
+    .container tr:nth-child(even) {
+      background-color: #ffffff;
+    }
+
+    .container th {
+      top: 15px;
+      padding: 10px;
+      background-color: #A18594;
+    }
+    .container tr:hover {
+      /*
+      background-color: #FDE2F3;
+      */
+      -webkit-box-shadow: 0 6px 6px -6px #0E1119;
+      -moz-box-shadow: 0 6px 6px -6px #0E1119;
+      box-shadow: 0 6px 6px -6px #0E1119;
+    }
+
+    @media (max-width: 800px) {
+      .container td:nth-child(4),
+      .container th:nth-child(4) { display: none; }
+    }
+
+    /*****************//*
+    */
+    .cover-back {
+      /*   content: '';
+         position: absolute;*/
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 1;
+      transition: all 1s cubic-bezier(0.4, 0, 1, 1);
+    }
+    .tabs {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      width: 800px;
+      overflow: hidden;
+      border-radius: 280px;
+      transition: all .4s cubic-bezier(0.65, 0.05, 0.36, 1);
+    }
+    .tabs-container {
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 500px;
+      height: 50px;
+    }
+    .tab-item {
+      width: 45px;
+      height: 100px;
+      margin: 0 17.5px;
+      color: #800080;
+      opacity: 0;
+      transform: scale(0);
+      font-size: 20px;
+
+      text-align: center;
+      line-height: 100px;
+      transition: all .5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+    .tab-item:nth-child(1){ transition-delay: .2s; }
+
+    .tab-item:nth-child(2){ transition-delay: .4s; }
+
+    .tab-item:nth-child(4){ transition-delay: .6s; }
+
+    .tab-item:nth-child(5){ transition-delay: .8s; }
+
+    .tab-item{ cursor: pointer; }
+
+    .tab-item--middle {
+      opacity: 1;
+      transform: scale(1);
+      border-radius: 50%;
+      color: #800080;
+      background-color: #eadbd4;
+    }
+
+    /* Animations */
+
+    @keyframes show-tab-items {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes hide-tab-items {
+      to {
+        opacity: 0;
+        transform: scale(0);
+      }
+    }
+    @keyframes add-background {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes remove-background {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    /* Javascript part */
+    .js-tabs-init {
+      width: 150px;
+      border-radius: 50%;
+    }
+
+    .js-cover-back-animate {
+      opacity: 0;
+      transition: all 3s;
+      animation: add-background linear 2s forwards;
+    }
+    .js-tab-item-show {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .js-tab-item-active { position: relative; }
+
+    .js-tab-item-active:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 3px solid #ff5252;
+      background-color: white;
+      opacity: .6;
+    }
+    /******************Select****/
+    input{
+      margin-top: -10px;
+      width: 150px;
+      margin-left: 1%;
+      font-size: 25px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      outline: 0;
+      border: 1px solid #b9d932;
+      height: 2em;
+      box-shadow: none;
+      flex: 1;
+      padding: 0 0.5em;
+      color: white;
+      background-color:#A18594;
+    }
+    select,option {
+      /* Reset Select */
+      border-radius: 8px;
+      appearance: none;
+      border:1px solid #b9d932;
+      font-size: 18px;
+      box-shadow: none;
+      /* Personalize */
+      flex: 1;
+      padding-top: 0.5em;
+      padding: 0 0.5em;
+      color: white;
+      background-color:#A18594;
+      background-image: none;
+      cursor: pointer;
+    }
+    #champ-selectionne option {
+      background-color: #eadbd4;
+      color: #800080;
+    }
+
+
+    /* Remove IE arrow */
+    select::-ms-expand {
+      display: none;
+    }
+    /* Custom Select wrapper */
+    .select {
+      position: relative;
+      display: flex;
+      width: 8.8em;
+      height: 1.5em;
+      border-radius: .25em;
+      overflow: hidden;
+      font-size: 20px;
+      border-color: #ffc720;
+      border: 2px;
+
+    }
+    /* Arrow */
+    .select::after {
+      color: #b9d932;
+      content: '\25BC';
+      position: absolute;
+      top: 0;
+      bottom: 5%;
+      right: 0%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      background-color: transparent;
+      transition: .25s all ease;
+      pointer-events: none;
+    }
+
+
+    /* Transition */
+     .select:hover::after {
+      color: #ccfa0a;
+    }  .sub:hover::after {
+      color: #808080;
+    }
+input:focus{
+  border: 2.5px solid #800080;
+}    /**********************Input nom et code barre */
+    select:focus{
+      border: 2.5px solid #800080;
+    }    /******************
+
+  </style>
+</head>
+<body>
+<div th:replace="navbar.html"></div>
+<div class="card shadow p-3 mb-5 bg-body rounded ">
+
+  <div style="color:gray;font-size:22px; font-family: 'Poppins', sans-serif  ;" class="fw-bold"  >
+    <i class="fa-solid fa-carrot" title="Gestion des produits"  style=" font-size:25px;color: #800080;margin-left: 8%" ></i>Les produits
+  </div>
+  <a type="button" class="close btn-close pull-right " style="margin-left: 90%" title="Fermer" th:href="@{/listProduits}"></a>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-14">
+        <h2 class="d-flex flex-row justify-content-end font-semibold text-xl leading-tight fw-bold" style="text-shadow: 4px 4px 5px #a3a3a3;color:#728a8d;font-size:28px">
+
+          <!-- <div class="select pull-left">
+               <select id="champ-selectionne">
+                   <option  style=";font-size: 20px" value="libelle">Libelle</option>
+                   <option style="font-size: 20px" value="code_barre">Code Barre</option>
+                   <option style="font-size: 20px" value="categorie">Catégorie</option>
+                   <option style="font-size: 20px" value="ZoneId">Zone</option>
+               </select>
+           </div>
+           <div>
+               <input id='search-btn' class="pull-right " type='checkbox'/>
+               <label for='search-btn' class="pull-right " style="border-color:#A7A1AE;background-color:#b9d932;color:whitesmoke;font-size:12px;">Show search bar</label>
+               <input id='search-bar' type='text' style="margin-left: 5px" placeholder='Rechercher...'/>
+           </div>-->
+          <div class="cover-back cover-back-body js-cover-back-body"></div>
+          <div class="tabs js-tabs">
+            <div class="cover-back cover-back-tabs js-cover-back-tabs"></div>
+            <div class="tabs-container">
+              <div class="tab-item js-tab-item first"><!-- data-gradient-start="7DA4FF" data-gradient-stop="4161C8" data-tab-color="7E82EC"-->
+                <a  style="color:#800080" th:href="@{/Zones}">  <i class="fa-solid fa-shop" title="Gestion de zone de stockage"></i> </a>
+              </div>
+              <div class="tab-item js-tab-item"><!-- data-gradient-start="FF7DC2" data-gradient-stop="B7C841" data-tab-color="ECB57E"-->
+                <a  style="color:#800080" th:href="@{/Marques}"> <i class="fa-solid fa-tag" title="Gestion des marques"></i> </a>
+              </div>
+              <div class="tab-item tab-item--middle js-tab-item js-tab-item-main-control">
+                <i style="margin-left: 20%" class="fas fa-plus"></i>
+              </div>
+              <div class="tab-item js-tab-item" ><!--data-gradient-start="7DC2FF" data-gradient-stop="C8419F" data-tab-color="B97EEC"-->
+                <a  style="color:#800080" data-bubble="ajouter nouveau ingredient"th:href="@{/addProd}"><i class="fa-solid fa-carrot" style="color: #864d7f" ></i> </a>
+              </div>
+              <div class="tab-item js-tab-item" ><!--data-gradient-start="B1FF7D" data-gradient-stop="41B5C8" data-tab-color="7EECAE"-->
+                <a  style="color:#800080" th:href="@{/categorie}"><i class="fa-solid fa-list-ul"  title="Gstion des categories"></i> </a>
+              </div>
+            </div>
+          </div>
+
+        </h2>
+        <form style="margin-left: 0%; margin-bottom: -2%;margin-top: -2%" th:action="@{/rechercheProduits}" method="get" id="MyForm">
+          <table style="top:5%;border-collapse: collapse;" class="container"  id="ma_table1">
+            <thead >
+            <tr>
+              <th style="text-align: center;   "> <input placeholder="Nom du produit" id="nom" name="nom" type="text">
+              </th>
+              <th style="text-align: center "> <input placeholder="Code barre du produit" id="cde_barre" name="code_barre" type="text">
+              </th>
+              <th style="text-align: center; "> <div class="select" >
+                <select id="categorie"  style="padding-right: 0" name="categorie">
+                  <option value="0">Catégorie</option>
+                  <th:block th:each="categorie : ${categories}">
+                    <option th:value="${categorie.id}" th:text="${categorie.libelle}"></option>
+                  </th:block>
+                </select>
+              </div></th>
+
+              <th style="text-align: center;  "><div  class="select">
+                <select name="marqueId">
+                  <option style="font-size: 20px" value="0">Marque</option>
+                  <th:block th:each="marque : ${marques}">
+                    <option style="font-size: 20px" th:value="${marque.id}" th:text="${marque.libelle}"></option>
+                  </th:block>
+                </select>
+              </div></th>
+
+              <th style="text-align: center;"> <div  class="select ">
+                <select id="ZoneId" name="zoneId" >
+                  <option value="0">Zone stockage</option>
+                  <th:block th:each="Zone : ${zoneStockageMetier}">
+                    <option th:value="${Zone.id}" th:text="${Zone.designation}"></option>
+                  </th:block>
+                </select>
+              </div></th>
+              <th style="text-align: center; padding: 0px;"> <input id="date_expiration" name="date_expiration" type="date">
+              </th>
+              <th style="text-align: center; padding: 6px;padding-right: -1%">   <button class="sub"  type="submit" style="font-size: 26px; margin-left: 1%; border: none; background-color: transparent; color: #b9d932;">
+                <i id="sub" class=" fas fa-search sub"></i>
+              </button>
+              </th>
+            </tr>
+            </thead>
+          </table>
+        </form>
+        <br>
+        <table style="top:5%;" class="container"  id="ma_table">
+
+          <thead >
+          <tr>
+            <th style="text-align: center; "><h1>Libelle</h1></th>
+            <th style="text-align: center; "><h1>Code barre</h1></th>
+            <th style="text-align: center; "><h1>catégorie</h1></th>
+
+            <th style="text-align: center; "><h1>Marque</h1></th>
+
+            <th style="text-align: center; "><h1>Zone de stockage</h1></th>
+            <th style="text-align: center; "><h1>Quantité</h1></th>
+            <th style="text-align: center; "><h1>Date d'éxpiration</h1></th>
+            <th style="text-align: center; "><h1>Numero</h1></th>
+            <th class=""><h1 class="pull-right" style="margin-right: 25px">Action</h1></th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="cellule "th:each="listProduit:${produits}" >
+            <td data-champ="nom"><a  th:text="${listProduit.getProduit().getNom()}" th:href="@{/Produit/new/{id}(id=${listProduit.id})}"  style="color: gray;text-decoration: none"  ></a></td>
+            <td data-champ="code_barre" style="color: gray" th:text="${listProduit.produit.getCode_barre()}"></td>
+            <td data-champ="categorie" style="color: gray" th:text="${listProduit.produit.categorie.libelle}"></td>
+            <td data-champ="marque" style="color: gray">
+              <span th:if="${listProduit.produit.getNomMarque()!=null}" th:text="${listProduit.produit.getNomMarque()}"></span>
+              <span th:if="${listProduit.produit.getNomMarque()==null}">
+      <i class="fa-regular fa-hourglass "  style="color:#cb99c9"></i>
+  </span>
+            </td>
+
+            <td data-champ="marque" style="color: gray">
+              <span th:if="${listProduit.produit.getNomZone()!=null}" th:text="${listProduit.zone_stockage.designation}"></span>
+              <span th:if="${listProduit.produit.getNomZone()==null}">stock en-cours
+  </span>
+            </td>
+            <td data-champ="qte_Produit"  style="color: gray">
+              <span th:if="${listProduit.produit.getNomZone()!=null}" th:text="${listProduit.qte_Produit}"></span>
+              <span th:if="${listProduit.produit.getNomZone()==null}"
+                    th:text="${listProduit.produit.getStock_en_cours()}"></span>
+            </td>
+
+
+            <td data-champ="date_expiration"  style="color: gray">
+              <span th:if="${listProduit.produit.getDateExpiration()!=null}"  th:text="${listProduit.produit.getDateExpiration()}"></span>
+              <span th:if="${listProduit.produit.getDateExpiration()==null}">
+              <i class="fa-regular fa-hourglass "  style="color:#cb99c9"></i></span>
+
+            </td>
+            <td data-champ="numero_Lot"  style="color: gray">
+              <span th:if="${listProduit.produit.getDateExpiration()!=null}"  th:text="${listProduit.produit.getNumLot()}"></span>
+              <span th:if="${listProduit.produit.getDateExpiration()==null}">
+              <i class="fa-regular fa-hourglass "  style="color:#cb99c9"></i></span>
+
+            </td>
+
+            <!-- <td style="color: gray">
+                 <span th:each="marqueProduit1 : ${marqueProduit}" th:text="${marqueProduit1.marque.libelle}"></span>
+             </td>-->
+            <td class=" " style="text-align: right" >
+              <a th:href="@{/Produit/new/{id}(id=${listProduit.id})}"  class="btn1 btn-sm mr-2">
+                <i class="fas fa-edit" style="color:#b9d932;font-size: 18px" ></i></a>
+              <a data-bs-toggle="modal" data-bs-target="#exampleModal"
+                 class="btn-sm mr-2">
+                <i class="fas fa-trash"  style="color: #b9d932; cursor: pointer;font-size: 18px"></i>
+              </a>
+              <form th:action="@{/Produit/delete/{id}(id=${listProduit.id})}" action="" method="post">
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+                  <div class="modal-dialog" style="width: 25%;">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div>
+                          <i class="fas fa-exclamation-circle d-flex flex-row justify-content-center align-items-center" style="font-size:3rem;margin: 0 auto;color:#A18594"></i>
+                        </div><br>
+                        Attention, la suppression de le produit <strong style="color: #b9d932" th:text="${listProduit.nom}">  </strong>
+                        va conduire à la suppression de tous les xx qui ont une liaison avec ce produit
+                        <br><strong style="color: #b9d932;font-size:1.2rem"> Êtes-vous sûr de vouloir supprimer ce produit ? </strong>
+                      </div>
+                      <div class="modal-footer">
+                        <button class="icon-btn add-btn">
+                          <div class="btn-txt fw-bold" style="color: #A18594">Supprimer</div>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
+
+<script type="text/javascript"
+        src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script
+        src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.min.js"></script>
+<script
+        src="https://cdn.datatables.net/1.12.0/js/dataTables.bootstrap5.min.js"></script>
+<script>
+  /**/
+  /*    document.getElementById("search-bar").addEventListener("input", rechercher);
+      function rechercher() {
+          var champRecherche = document.getElementById("search-bar").value.toLowerCase();
+          var champSelectionne = document.getElementById("champ-selectionne").value;
+          var table = document.getElementById("ma_table");
+          var lignes = table.getElementsByTagName("tr");
+
+          for (var i = 1; i < lignes.length; i++) {
+              var ligne = lignes[i];
+              var colonnes = ligne.getElementsByTagName("td");
+              var correspondance = false;
+
+              for (var j = 0; j < colonnes.length; j++) {
+                  var colonne = colonnes[j];
+                  if (colonne && colonne.getAttribute("data-champ") === champSelectionne) {
+                      var valeur = colonne.textContent.toLowerCase();
+
+                      if (valeur.indexOf(champRecherche) > -1) {
+                          correspondance = true;
+                          break;
+                      }
+                  }
+              }
+              if (correspondance) {
+                  ligne.style.display = "";
+              } else {
+                  ligne.style.display = "none";
+              }
+          }
+      }*/
+  /****/
+  /**
+   * The tab element
+   * @type {Element}
+   */
+  var tabs = document.querySelector('.js-tabs');
+
+  /**
+   * All tabs items execept the one that animates the tab
+   * @type {Element}
+   */
+  var tabItems = document.querySelectorAll('.js-tab-item:not(.js-tab-item-main-control)');
+
+  /**
+   * The tab element that animates the tab
+   * @type {Element}
+   */
+  var tabItemMainControl = document.querySelector('.js-tab-item-main-control');
+
+  /**
+   * The background of the body
+   * @type {Element}
+   */
+  var coverBackBody = document.querySelector('.js-cover-back-body');
+
+  /**
+   * The background of the tabs menu
+   * @type {Element}
+   */
+  var coverBackTabs = document.querySelector('.js-cover-back-tabs');
+
+  /*
+    Trigger the animation of the tabs
+      Open the tab and show all tabs items
+   */
+  tabItemMainControl.addEventListener('click', function(){
+    if(tabs.classList.contains('js-tabs-init')){
+      tabs.classList.remove('js-tabs-init');
+      tabItemMainControl.style.transform = 'rotate(45deg)';
+      for(var i = 0; i < tabItems.length; i++){
+        tabItems[i].classList.add('js-tab-item-show');
+      }
+    }else{
+      for(var i = 0; i < tabItems.length; i++){
+        tabItems[i].classList.remove('js-tab-item-show');
+      }
+      setTimeout(function(){
+        tabItemMainControl.style.transform = 'rotate(0deg)';
+        tabs.classList.add('js-tabs-init');
+      }, 2000);
+    }
+  });
+
+  /*
+      Browse all tabs button
+        - To change background
+     *
+/**/
+  for(var i = 0; i < tabItems.length; i++){
+
+    tabItems[0].classList.add('js-tab-item-active');
+
+    tabItems[i].addEventListener('click', function(){
+
+      //Toggle the active tab item
+      var tabActive = document.querySelector('.js-tab-item-active');
+      tabActive.classList.remove('js-tab-item-active');
+      this.classList.add('js-tab-item-active');
+
+      //Remove the body's background
+      coverBackBody.style.animationName = 'remove-background';
+      coverBackBody.style.animationDuration = '1s';
+      coverBackBody.style.animationTimingFunction = 'linear';
+      coverBackBody.style.animationFillMode = 'forwards';
+
+      //Remove the tabs background
+      coverBackTabs.style.width = 0;
+
+      var self = this;
+      window.setTimeout(function(){
+
+        //Change the body's background
+        coverBackBody.style.animationName = 'add-background';
+        coverBackBody.style.backgroundImage = 'linear-gradient(#' + self.dataset.gradientStart + ', #' + self.dataset.gradientStop + ')';
+        coverBackBody.classList.add('js-cover-back-animate');
+
+        //Change the tabs background
+        coverBackTabs.style.backgroundColor = '#' + self.dataset.tabColor;
+        coverBackTabs.style.width = '100%';
+
+
+      }, 1200);
+    })
+  }
+
+  //Initial state of the tab
+  tabs.classList.add('js-tabs-init');
+
+</script>

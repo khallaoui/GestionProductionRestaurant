@@ -1,0 +1,69 @@
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table class="container"  id="ma_table">
+
+  <thead >
+  <tr>
+    <th style="text-align: center; "><h1>Libelle</h1></th>
+    <th style="text-align: center; "><h1>Unité</h1></th>
+    <th style="text-align: center; "><h1>Prix initial</h1></th>
+    <th style="text-align: center; "><h1>Code barre</h1></th>
+    <th style="text-align: center; "><h1>catégorie</h1></th>
+    <th class=""><h1 class="pull-right" style="margin-right: 25px">Action</h1></th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="cellule "th:each="listProduit:${ZoneProduit}" >
+    <td data-champ="libelle"><a  th:text="${listProduit.nom}" th:href="@{/Produit/new/{id}(id=${listProduit.id})}"  style="color: gray;text-decoration: none"  ></a></td>
+    <td data-champ="unite" style="color: gray" th:text="${listProduit.unite}"></td >
+    <td data-champ="prix_initial" style="color: gray" th:text="${listProduit.prix_initial}"></td>
+    <td data-champ="code_barre" style="color: gray" th:text="${listProduit.code_barre}"></td>
+    <td data-champ="categorie" style="color: gray" th:text="${listProduit.categorie.libelle}"></td>
+    &lt;!&ndash; <td style="color: gray">
+         <span th:each="marqueProduit1 : ${marqueProduit}" th:text="${marqueProduit1.marque.libelle}"></span>
+     </td>&ndash;&gt;
+    <td class=" " style="text-align: right" >
+      <a th:href="@{/Produit/new/{id}(id=${listProduit.id})}"  class="btn1 btn-sm mr-2">
+        <i class="fas fa-edit" style="color:#b9d932;font-size: 18px" ></i></a>
+      <a data-bs-toggle="modal" data-bs-target="#exampleModal"
+         class="btn-sm mr-2">
+        <i class="fas fa-trash"  style="color: #b9d932; cursor: pointer;font-size: 18px"></i>
+      </a>
+      <form th:action="@{/Produit/delete/{id}(id=${listProduit.id})}" action="" method="post">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+          <div class="modal-dialog" style="width: 25%;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <i class="fas fa-exclamation-circle d-flex flex-row justify-content-center align-items-center" style="font-size:3rem;margin: 0 auto;color:#A18594"></i>
+                </div><br>
+                Attention, la suppression de le produit <strong style="color: #b9d932" th:text="${listProduit.nom}">  </strong>
+                va conduire à la suppression de tous les xx qui ont une liaison avec ce produit
+                <br><strong style="color: #b9d932;font-size:1.2rem"> Êtes-vous sûr de vouloir supprimer ce produit ? </strong>
+              </div>
+              <div class="modal-footer">
+                <button class="icon-btn add-btn">
+                  <div class="btn-txt fw-bold" style="color: #A18594">Supprimer</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>-->

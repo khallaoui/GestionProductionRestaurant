@@ -1,0 +1,97 @@
+html {
+  background: #44384e;
+  margin: 70px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 200px;
+}
+ul li {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  -webkit-transform-origin: 100% 100%;
+  overflow: hidden;
+  display: none;
+}
+ul li a {
+  color: #fcd1d5;
+  display: block;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  text-align: center;
+  background: #f6717f;
+  font-size: 25px;
+}
+ul li:nth-child(odd) a {
+  background: #f77b88;
+}
+ul li:nth-child(1) {
+  display: block;
+}
+ul li:nth-child(1) a:hover {
+  background: #f45969;
+  color: white;
+}
+ul li:nth-child(2) {
+  display: block;
+}
+ul li:nth-child(2) a:hover {
+  background: #f45969;
+  color: white;
+}
+ul li:nth-child(3) {
+  display: block;
+}
+ul li:nth-child(3) a:hover {
+  background: #f45969;
+  color: white;
+}
+ul li:nth-child(4) {
+  display: block;
+}
+ul li:nth-child(4) a:hover {
+  background: #f45969;
+  color: white;
+}
+ul li:nth-child(5) {
+  display: block;
+}
+ul li:nth-child(5) a:hover {
+  background: #f45969;
+  color: white;
+}
+ul li:nth-child(6) {
+  display: block;
+}
+ul li:nth-child(6) a:hover {
+  background: #f45969;
+  color: white;
+}
+ul li.close {
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  left: calc(50% - 25px);
+  top: calc(50% - 25px);
+  display: block;
+  -webkit-transform-origin: 50% 50%;
+}
+ul li.close a {
+  background: none;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  color: #ccc;
+}
+
+/*# sourceMappingURL=details.css.map */

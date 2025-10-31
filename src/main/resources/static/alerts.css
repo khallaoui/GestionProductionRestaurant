@@ -1,0 +1,28 @@
+.twk-notification {
+  position: relative;
+  font-size: 1em;
+}
+.twk-notification__bell {
+  position: relative;
+}
+.twk-notification__count {
+  position: absolute;
+  left: -0.25em;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25em;
+  height: 1.25em;
+  font-size: 0.8em;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  background: #f00;
+  border-radius: 50%;
+}
+.twk-notification__right .twk-notification__menu {
+  right: 0;
+}
+
+/*# sourceMappingURL=alerts.css.map */
